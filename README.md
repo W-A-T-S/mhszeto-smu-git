@@ -1,1 +1,0 @@
-# mhszeto-smu-git
