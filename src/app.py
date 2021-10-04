@@ -1,7 +1,8 @@
-from flask import flask
+import flask
+import time
 
 
 app = flask.Flask(__name__)
 @app.route("/")
 def index():
-    return "Welcome!!! "
+    return "Welcome!!! ", time.localtime
