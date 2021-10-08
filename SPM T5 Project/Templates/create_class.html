@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIO Learning Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <div class="container">
+            <a class="navbar-brand" href="#">AIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a></li>
+            
+                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome, Adminstrator!</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+      <!-- Header-->
+      <header class="bg-secondary py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder"> Adminstrator Dashboard</h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Review Request, Assign Learners, Assign Trainers </p>
+            </div>
+        </div>
+    </header>
+
+    <br><br>
+    <!-- Section-->
+    <div class="container" id="test">
+                <table class="table table-condensed" id="assignLearnerTable">
+                    <thead class="table-info">
+                      <tr>
+                        <th>Class ID</th>
+                        <th>Trainer username</th>
+                        <th>Admin username</th>
+                        <th>Enrolment Open</th>
+                        <th>Enrolment Close</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Start tiem</th>
+                        <th>End time</th>
+                        <th>Class Size</th>
+                        <th>Class available slots</th>
+                      </tr>
+
+
+                      <tr>
+
+                        </div>
+                            <div id="button">
+                                <div id="button_container_1">
+                                    <button type="button" class="btn btn-primary">Add a row</button>
+                                </div>
+                                <div id="button_container_2">
+                                    <button type="button" class="btn btn-success">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                      </tr>
+
+
+                    </thead>
+
+                    <tbody>
+
+
+                   
+                    
+
+                    </tbody>
+
+
+
+
+
+
+
+                    
+<!-- 
+                    <tbody>
+                      <tr v-for="record in learners">
+                          <td></td>
+                          <td></td>
+                          <td> <button type="button" class="btn btn-info">Select</button></td>
+                        </tr>
+                    </tbody> -->
+
+
+                  </table>        
+    </div>
+
+
+
+
+
+    
+
+    <br><br>
+    <!-- Footer-->
+    <footer class="py-5">
+        <div class="container"><p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p></div>
+    </footer>
+    
+
+    <script>
+  
+       
+
+
+const vm = new Vue({
+            el: '#test',
+            data: {
+                learners: []
+            },
+            mounted: function() {
+                axios.get('http://127.0.0.1:5000/checklearner')
+                    .then(response => {
+                        console.log(response.data.name)
+                        this.learners = response.data;
+                    })
+                    .catch(error => alert(error));
+            }
+        });
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+ 
+</body>
+</html>
