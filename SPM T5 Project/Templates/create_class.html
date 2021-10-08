@@ -127,13 +127,13 @@
 const vm = new Vue({
             el: '#test',
             data: {
-                learners: []
+                classes: []
             },
             mounted: function() {
-                axios.get('http://127.0.0.1:5000/createclass')
+                axios.get('http://127.0.0.1:5000/all_class')
                     .then(response => {
                         console.log(response.data.name)
-                        this.learners = response.data;
+                        this.classes = response.data;
                     })
                     .catch(error => alert(error));
             }
