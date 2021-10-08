@@ -8,32 +8,33 @@ connection = pymongo.MongoClient(
     authSource="admin",
     authMechanism="SCRAM-SHA-256",
 )
+#database
+# db = connection["spm_aio_db"]
+# # collection = db["test"]
+# # collection.insert(dict({"hello": "how are you"}))
+# collection = db["learner"]
+# x = collection.find(dict({"is_trainer": True}))
+# print(list(x))
 
-db = connection["spm_aio_db"]
-
-# collection = db["test"]
-# collection.insert(dict({"hello": "how are you"}))
-
-collection = db["learner"]
-x = collection.find(dict({"is_trainer": True}))
-print(list(x))
-
-
-
-
-
+#homepage
 app = Flask(__name__)
 @app.route('/')
 def home():
-    return "Hey there! Welcome to homepage" + x
+    return "Hey there! Welcome to homepage" 
 
-@app.route("/<role>")
-def user(role):
-    return f"hello {role}"
+
+
+
+
+
 
 @app.route("/createclass")
 def createclass():
-    return render_template('create_class.html')
+    if request.method =="POST":
+        user = request.form["nm"]
+        return user
+    else:
+        return render_template('create_class.html')
 
 #redirecting website with param /admin back to homepage
 @app.route("/admin")

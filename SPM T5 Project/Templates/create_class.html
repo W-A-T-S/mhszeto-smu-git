@@ -10,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
     crossorigin="anonymous">
+
+    <!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -17,6 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
         <div class="container">
@@ -70,17 +73,7 @@
 
                       <tr>
 
-                        </div>
-                            <div id="button">
-                                <div id="button_container_1">
-                                    <button type="button" class="btn btn-primary">Add a row</button>
-                                </div>
-                                <div id="button_container_2">
-                                    <button type="button" class="btn btn-success">Download</button>
-                                </div>
-                            </div>
-                        </div>
-                      </tr>
+
 
 
                     </thead>
@@ -137,7 +130,7 @@ const vm = new Vue({
                 learners: []
             },
             mounted: function() {
-                axios.get('http://127.0.0.1:5000/checklearner')
+                axios.get('http://127.0.0.1:5000/createclass')
                     .then(response => {
                         console.log(response.data.name)
                         this.learners = response.data;
