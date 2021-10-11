@@ -6,8 +6,6 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from datetime import datetime
 app = Flask(__name__)
-
-
 connection = pymongo.MongoClient(
     "18.136.194.180",
     username="spm_team",
@@ -15,27 +13,20 @@ connection = pymongo.MongoClient(
     authSource="admin",
     authMechanism="SCRAM-SHA-256",
 )
-
 db = connection["spm_aio_db"]
 collection = db["class"]
 
-
-# @app.route("/add",methods = ["POST"])
-# def add_cls():
-#     _json = request.json
-#     _name = _json["name"]
-#     _email = _json['email']
 
 #display all classes
 @app.route("/all_class",methods = ["GET"])
 def all_class():
     all_class = collection.find() 
-    resp = dumps(all_class)
-    return render_template('create_class.html')
+    # return all_class[0]
+    return render_template('create_class.html', all_class = all_class)
 
 
 #Select one class to display according to specified id
-@app.route("/all_class/<id>",methods = ["GET"])
+@app.route("/each_class/<id>",methods = ["GET"])
 def each_class(id):
     each_class = collection.find_one({'_id':ObjectId()}) 
     resp = dumps(all_class)
