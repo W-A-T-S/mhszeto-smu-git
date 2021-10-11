@@ -57,9 +57,8 @@
    
     <div class="container" id="test">
                 
-                  
-                        <h2><b>Create Class</b> <button type class ="btn btn-success float-right " data-toggle='modal' data-target='#mymodal'>Add new class</button></h2> 
-
+                        <h2>Create  <b>Class </b>  <button type="button"  class="btn btn-success float-right"
+                            data-toggle="modal" data-target="#mymodal">Add New Class</button> </h2>
 
                         <table class = "table table-hover table" id="createClass">
                             <thead>
@@ -94,10 +93,19 @@
                             <td>{{row.end_date_time}}</td>
                             <td>{{row.class_size}}</td>
                             <td>{{row.class_available_slots}}</td>
+                          
+                            <!-- Buttons -->
                             <td>
-                                <a href= "" class = "btn btn-warning btn-xs" data-toggle="modal" data-target="modaledit">Edit</a>
-                                <a href= "" class = "btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                                <!-- Edit class -->
+                                <!-- <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a> -->
+
+                                <!-- Delete class -->  
+                                <!-- <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a> -->
+     
+     
                             </td>
+
+
                         </tr>
                         {%endfor%}
                     
@@ -107,7 +115,7 @@
                 </div>
 
                 <!-- FORMS -->
-                <!-- modal add class -->
+                <!-- Add class -->
                 <div id="mymodal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                        <div class="modal-content">
@@ -137,11 +145,11 @@
 
                                  <div class="form-group">
                                     <label>Start date time</label>
-                                    <input type="text" class="form-control" name="start_date" required="1">
+                                    <input type="text" class="form-control" name="start_date_time" required="1">
                                  </div>
                                  <div class="form-group">
                                     <label>End Date time</label>
-                                    <input type="text" class="form-control" name="end_date" required="1">
+                                    <input type="text" class="form-control" name="end_date_time" required="1">
                                  </div>
                              
                     
@@ -170,8 +178,6 @@
 
 
                     
-
-
                   </table>        
     </div>
 
