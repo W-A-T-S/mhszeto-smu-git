@@ -7,8 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIO Learning Management System</title>
 
-    <!-- Bootstrap CSS -->
-    <script src="/js/assign_trainer.js"></script>
+    <script type="text/javascript">
+        var course_id = '{{ data.course_id }}';
+        var class_id = '{{ data.class_id }}';
+    </script>
+    <script src="{{url_for('static', filename='assign_trainer.js')}}"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -105,8 +109,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">List of Trainers</h5>
                 </div>
-                <div class="modal-body">
-                    <table class="table table-condensed p-2" id="assignTrainerTable">
+                <div class="modal-body" style="overflow-x: auto;">
+                    <table class="table table-condensed" id="assignTrainerTable">
                         <thead class="table-info">
                             <tr>
                                 <th>ID</th>
@@ -156,10 +160,10 @@
     </footer>
 
     <script>
-        $(document).ready(function () {
-            $('#assignTrainerTable').DataTable();
-            $('.dataTables_length').addClass('bs-select');
-        });
+        // $(document).ready(function () {
+        //     $('#assignTrainerTable').DataTable();
+        //     $('.dataTables_length').addClass('bs-select');
+        // });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"

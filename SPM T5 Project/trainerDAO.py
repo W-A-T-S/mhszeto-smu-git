@@ -18,8 +18,10 @@ class TrainerDAO:
         many_trainer = list(self._collection.find(dict({"is_trainer": True})))
         many_trainer_objects = []
         for one_trainer in many_trainer:
-            one_course_object = Trainer(username=one_trainer["_id"]["username"],
-                                        name=one_trainer["name"],
-                                        current_designation=one_trainer["current_designation"])
+            one_course_object = Trainer(
+                username=one_trainer["_id"]["username"],
+                name=one_trainer["name"],
+                current_designation=one_trainer["current_designation"],
+            )
             many_trainer_objects.append(one_course_object)
         return many_trainer_objects

@@ -1,17 +1,18 @@
-
 class Class:
-    def __init__(self,
-                 class_id="",
-                 course_id="",
-                 trainer_username="",
-                 trainer_name="",
-                 admin_username="",
-                 enrolment_open_date="",
-                 enrolment_close_date="",
-                 start_date_time="",
-                 end_date_time="",
-                 class_size="",
-                 class_available_slots=""):
+    def __init__(
+        self,
+        class_id="",
+        course_id="",
+        trainer_username="",
+        trainer_name="",
+        admin_username="",
+        enrolment_open_date="",
+        enrolment_close_date="",
+        start_date_time="",
+        end_date_time="",
+        class_size="",
+        class_available_slots="",
+    ):
         self.__class_id = class_id
         self.__course_id = course_id
         self.__trainer_username = trainer_username

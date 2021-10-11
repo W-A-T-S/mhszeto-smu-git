@@ -1,5 +1,7 @@
 class Course:
-    def __init__(self, course_id="", title="", description="", is_retired="", admin_username=""):
+    def __init__(
+        self, course_id="", title="", description="", is_retired="", admin_username=""
+    ):
         self._course_id = course_id
         self._title = title
         self._description = description

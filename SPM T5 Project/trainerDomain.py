@@ -1,8 +1,5 @@
 class Trainer:
-    def __init__(self,
-                 username="",
-                 name="",
-                 current_designation=""):
+    def __init__(self, username="", name="", current_designation=""):
         self._username = username
         self._name = name
         self._current_designation = current_designation
