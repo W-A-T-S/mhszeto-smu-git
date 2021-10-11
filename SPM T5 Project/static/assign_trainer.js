@@ -6,10 +6,8 @@ function initial_fetch() {
 			document.getElementById(
 				'course_id'
 			).innerText = `${raw.data.course.id} - ${raw.data.course.title}`;
-			document.getElementById('class_start_date_time').innerText =
-				raw.data.class.start_date_time;
-			document.getElementById('class_end_date_time').innerText =
-				raw.data.class.end_date_time;
+			document.getElementById('class_start_date_time').innerText = new Date(raw.data.class.start_date_time);
+			document.getElementById('class_end_date_time').innerText =new Date(raw.data.class.end_date_time);
 
 			if (raw.data.class.trainer_name && raw.data.class.trainer_username) {
 				document.getElementById(
@@ -50,8 +48,6 @@ function initial_fetch() {
         </div`;
 		});
 
-        $('#assignTrainerTable').DataTable();
-        $('.dataTables_length').addClass('bs-select');
 }
 
 initial_fetch();

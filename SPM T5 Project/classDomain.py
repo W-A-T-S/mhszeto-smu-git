@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Class:
     def __init__(
         self,
@@ -6,12 +9,12 @@ class Class:
         trainer_username="",
         trainer_name="",
         admin_username="",
-        enrolment_open_date="",
-        enrolment_close_date="",
-        start_date_time="",
-        end_date_time="",
-        class_size="",
-        class_available_slots="",
+        enrolment_open_date=datetime(1970, 1, 1),
+        enrolment_close_date=datetime(1970, 1, 1),
+        start_date_time=datetime(1970, 1, 1, 12, 00),
+        end_date_time=datetime(1970, 1, 1, 12, 00),
+        class_size=0,
+        class_available_slots=0,
     ):
         self.__class_id = class_id
         self.__course_id = course_id

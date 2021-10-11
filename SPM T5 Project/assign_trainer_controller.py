@@ -98,8 +98,7 @@ def update_class_course_information(course_id, class_id):
             "$set": {
                 "trainer_name": request.json["trainer_name"],
                 "trainer_username": request.json["trainer_username"],
-            },
-            "$currentDate": {"lastModified": True},
+            }
         },
     )
 
