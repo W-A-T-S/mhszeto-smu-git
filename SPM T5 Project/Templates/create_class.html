@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIO Learning Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+    <!-- javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <div class="container">
+            <a class="navbar-brand" href="#">AIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a></li>
+            
+                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome, Adminstrator!</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+      <!-- Header-->
+      <header class="bg-secondary py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder"> Adminstrator Dashboard</h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Review Request, Assign Learners, Assign Trainers </p>
+            </div>
+        </div>
+    </header>
+
+    <br><br>
+    <!-- Section-->
+
+   
+    <div class="container" id="test">
+                
+                        <!-- <h2>Create  <b>Class </b>  <button type="button"  class="btn btn-success float-right"
+                            data-toggle="modal" data-bs-target="#mymodal">Add New Class</button> </h2> -->
+
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#mymodal" >Add New Class </button>
+                        <table class = "table table-hover table" id="createClass">
+                            <thead>
+                                
+                            <tr>
+                                <th>Course ID</th>
+                                <th>Class ID</th>
+                                <th>Trainer username</th>
+                                <th>Trainer name</th>
+                                <th>Admin username</th>
+                                <th>Enrolment Open</th>
+                                <th>Enrolment Close</th>
+                                <th>Start date time</th>
+                                <th>End date time</th>
+                                <th>Class Size</th>
+                                <th>Class available slots</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+                      {% for row in all_class %}
+
+                        <tbody>
+                        <tr>
+                            <td >{{row['_id'].course_id}}</td>
+                            <td>{{row['_id'].class_id}}</td>
+                            <td >{{row.trainer_username}}</td>
+                            <td >{{row.trainer_name}}</td>
+                            <td >{{row.admin_username}}</td>
+                            <td>{{row.enrolment_open_date}}</td>
+                            <td>{{row.enrolment_close_date}}</td>
+                            <td>{{row.start_date_time}}</td>
+                            <td>{{row.end_date_time}}</td>
+                            <td>{{row.class_size}}</td>
+                            <td>{{row.class_available_slots}}</td>
+                          
+                            <!-- Buttons -->
+                            <td>
+                                <!-- Edit class -->
+                                <!-- <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a> -->
+
+                                <!-- Delete class -->  
+                                <!-- <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a> -->
+     
+     
+                            </td>
+
+
+                        </tr>
+                        {%endfor%}
+                    
+                    </tbody>
+
+                    </table>
+                </div>
+
+                <!-- FORMS -->
+                <!-- Add class -->
+                <div id="mymodal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                       <div class="modal-content">
+                          <div class="modal-header">
+                             <h4 class="modal-title">Create Class</h4>
+                          </div>
+                          <div class="modal-body">
+                             <form action="{{url_for('create_class')}}" method="POST">
+
+                                <div class="form-group">
+                                   <label>Course ID:</label>
+                                   <input type="text" class="form-control" name="course_id" required="1">
+                                </div>
+
+                                 <div class="form-group">
+                                   <label>Class ID</label>
+                                   <input type="text" class="form-control" name="class_id" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Trainer Username</label>
+                                    <input type="text" class="form-control" name="trainer_username" required="1">
+                                 </div>
+                                 <div class="form-group">
+                                    <label>Trainer Name</label>
+                                    <input type="text" class="form-control" name="trainer_name" required="1">
+                                 </div>
+
+                                 <div class="form-group">
+                                    <label>Start date time</label>
+                                    <input type="text" class="form-control" name="start_date_time" required="1">
+                                 </div>
+                                 <div class="form-group">
+                                    <label>End Date time</label>
+                                    <input type="text" class="form-control" name="end_date_time" required="1">
+                                 </div>
+                             
+                    
+                                 <div class="form-group">
+                                    <label>Class size</label>
+                                    <input type="int" class="form-control" name="class_size" required="1">
+                                 </div>
+                                 <div class="form-group">
+                                    <label>Class available slots</label>
+                                    <input type="int" class="form-control" name="class_available_slots" required="1">
+                                 </div>
+                                 
+                                <div class="form-group">
+                                   <button class="btn btn-primary" type="submit">Add Employee</button>
+                                </div>
+                             </form>
+                          </div>
+                          <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+
+
+
+
+                    
+                  </table>        
+    </div>
+
+
+
+
+
+    
+
+    <br><br>
+    <!-- Footer-->
+    <footer class="py-5">
+        <div class="container"><p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p></div>
+    </footer>
+    
+
+    <script>
+  
+       
+
+
+const vm = new Vue({
+            el: '#test',
+            data: {
+                classes: []
+            },
+            mounted: function() {
+                axios.get('http://127.0.0.1:5000/all_class')
+                    .then(response => {
+                        console.log(response.data.name)
+                        this.classes = response.data;
+                    })
+                    .catch(error => alert(error));
+            }
+        });
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+ 
+</body>
+</html>
