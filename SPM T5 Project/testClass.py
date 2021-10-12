@@ -1,5 +1,5 @@
 import unittest
-from sample_app import Class
+from classDomain import Class
 
 class testClass(unittest.TestCase):
     def test_find_all_class(self):
