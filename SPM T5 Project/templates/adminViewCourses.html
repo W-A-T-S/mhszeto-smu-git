@@ -57,8 +57,8 @@
         <!-- For Courses -->
         {% for courseInfo in courses %}
         <div class="row">
-            <h4 class="col-md-9">{{courseInfo._id.course_id}}: {{courseInfo.title}}</h4>
-            <button class="btn btn-info col-md-3" onclick="location.href='http://localhost:5000/classes/{{courseInfo._id.course_id}}'">View Classes</button>
+            <h4 class="col-md-9">{{courseInfo.course_id}}: {{courseInfo.title}}</h4>
+            <button class="btn btn-info col-md-3" onclick="location.href='http://localhost:5000/classes/{{courseInfo.course_id}}'">View Classes</button>
             {% if courseInfo.is_retired == true %}
             <a>Status: Retired</a>
             {% else %}
