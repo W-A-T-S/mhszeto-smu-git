@@ -4,7 +4,7 @@ from courseDAO import CourseDAO
 from trainerDAO import TrainerDAO
 import datetime
 
-app = Flask(__name__, template_folder="html")
+app = Flask(__name__)
 
 
 @app.route("/assign_trainer/<string:course_id>/<string:class_id>")
