@@ -1,12 +1,13 @@
 class Course:
     def __init__(
-        self, course_id="", title="", description="", is_retired="", admin_username=""
+        self, course_id="", title="", description="", is_retired="", admin_username="", course_prerequisites=[]
     ):
         self._course_id = course_id
         self._title = title
         self._description = description
         self._is_retired = is_retired
         self._admin_username = admin_username
+        self._course_prerequisites = course_prerequisites
 
     def get_course_id(self):
         return self._course_id
@@ -22,3 +23,6 @@ class Course:
 
     def get_admin_username(self):
         return self._admin_username
+        
+    def get_course_prerequisites(self):
+        return self._course_prerequisites
