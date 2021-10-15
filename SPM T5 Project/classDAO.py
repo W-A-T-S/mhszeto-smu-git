@@ -80,3 +80,21 @@ class ClassDAO:
     def update_one(self, queryIdentifier, queryValues):
         res = self._collection.update_one(queryIdentifier, queryValues)
         return res
+
+#creating a class into mongodb 
+    def insert_one(self,one_class_object):
+
+        self._collection.insert(
+            {
+                "_id": {"course_id": one_class_object.get_course_id(), "class_id": one_class_object.get_class_id()},
+                "trainer_name": one_class_object.get_trainer_name(),
+                "trainer_username": one_class_object.get_trainer_username(),
+                "admin_username": one_class_object.get_admin_username(),
+                "enrolment_open_date": one_class_object.get_enrolment_open_date(),
+                "enrolment_close_date": one_class_object.get_enrolment_close_date(),
+                "start_date_time": one_class_object.get_start_date_time(),
+                "end_date_time": one_class_object.get_end_date_time(),
+                "class_size": one_class_object.get_class_size(),
+                "class_available_slots": one_class_object.get_class_available_slots(),
+            }
+        )
