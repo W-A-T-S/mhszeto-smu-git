@@ -24,16 +24,16 @@ class LearnerDAO:
             )
             many_learner_objects.append(one_learner_object)
         return many_learner_objects
-        
+
     def find_one(self, learner_username):
         #mongodb function - find_one
         #one_learner is dictionary retrieved from monogodb 
         one_learner = self._collection.find_one(dict({"is_trainer": False, 
                                         "is_admin": False, 
                                         "_id.username": learner_username }))
-        
+
         learner = Learner(username=one_learner["_id"]["username"], 
                          name=one_learner["name"],
                          current_designation=one_learner["current_designation"])
-        
+
         return learner
