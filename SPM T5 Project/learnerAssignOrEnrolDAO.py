@@ -1,6 +1,7 @@
 import pymongo
 from learnerAssignOrEnrolDomain import LearnerAssignOrEnrol
 
+
 class LearnerAssignOrEnrolDAO:
     def __init__(self):
         connection = pymongo.MongoClient(
@@ -18,13 +19,29 @@ class LearnerAssignOrEnrolDAO:
         many_assignments_list = []
         for one_assignment in many_assignments:
             one_assignment_object = LearnerAssignOrEnrol(
-                learner_username = one_assignment["_id"]["learner_username"],
-                admin_username = one_assignment["_id"]["admin_username"],
-                class_id = one_assignment["_id"]["class_id"],
-                course_id = one_assignment["_id"]["course_id"],
-                is_enrolment_approved = one_assignment["is_enrolment_approved"],
-                is_completed = one_assignment["is_completed"]
+                learner_username=one_assignment["_id"]["learner_username"],
+                admin_username=one_assignment["_id"]["admin_username"],
+                class_id=one_assignment["_id"]["class_id"],
+                course_id=one_assignment["_id"]["course_id"],
+                is_enrolment_approved=one_assignment["is_enrolment_approved"],
+                is_completed=one_assignment["is_completed"],
             )
             many_assignments_list.append(one_assignment_object)
         return many_assignments_list
 
+    def insert_one(self, one_assignment_obj):
+
+        self._collection.insert_one(
+            dict(
+                {
+                    "_id": {
+                        "learner_username": one_assignment_obj.get_learner_username(),
+                        "admin_username": one_assignment_obj.get_admin_username(),
+                        "class_id": one_assignment_obj.get_class_id(),
+                        "course_id": one_assignment_obj.get_course_id(),
+                    },
+                    "is_enrolment_approved": True,
+                    "is_completed": False,
+                }
+            )
+        )

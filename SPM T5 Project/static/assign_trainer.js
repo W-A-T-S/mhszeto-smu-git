@@ -1,5 +1,7 @@
 function initial_fetch() {
-	fetch(`http://127.0.0.1:5001/assign_trainer/json/${course_id}/${class_id}`)
+	console.log(`${course_id}`)
+	console.log(`${class_id}`)
+	fetch(`/assign_trainer/json/${course_id}/${class_id}`)
 		.then((response) => response.json())
 		.then((raw) => {
 			document.getElementById('class_id').innerText = raw.data.class.id;
@@ -38,7 +40,7 @@ function initial_fetch() {
 			}
 			document.getElementById('trainers-list').innerHTML = trainers_list;
 		})
-		.catch(() => {
+		.catch((error) => {
 			document.getElementById('insert-alert-div').innerHTML = `
         <div class=" container alert alert-danger alert-dismissible fade show" id="success-alert" role="alert">
             Invalid class or course id!
@@ -99,7 +101,7 @@ function assign_trainer() {
 		.getElementById('trainer_name_username')
 		.value.split(' - ')[1];
 
-	fetch(`http://127.0.0.1:5001/assign_trainer/json/${course_id}/${class_id}`, {
+	fetch(`/assign_trainer/json/${course_id}/${class_id}`, {
 	// fetch(`http://127.0.0.1:5001/assign_trainer/json/123/123`, {
 		method: 'PUT',
 		headers: {
