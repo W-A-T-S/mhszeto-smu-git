@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template
 import pymongo
 from flask_cors import CORS
 from learnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
+from learnerAssignOrEnrolDomain import LearnerAssignOrEnrol
 from learnerDAO import LearnerDAO
 from classDAO import ClassDAO
 from courseDAO import CourseDAO
@@ -33,21 +34,6 @@ theadmin="LarryThePaperChaser"
 #get all learners if the course does not require prerequisite
 noreq=""
 
-#Check if there is a req can combine with getreq()
-def checkreq(prerequisites): #can reuse for the enrollment shop page
-    # reqresults = coursereq_collection.find({"_id.course_id":searchcourse})
-    if (prerequisites>0):
-        noreq=False
-        return noreq
-        
-#Step 1 check if course require prerequisite
-# def getreq(): #can reuse for the enrollment shop page
-#     reqresult = coursereq_collection.find({"_id.course_id":searchcourse})
-#     if reqresult:
-#         for item in reqresult:
-#             req=item['_id']['course_prerequisite']
-#             return req
-
 def checklearner_for_prereq_list(list_of_prerequisites):
     learners_who_completed_prereq_list =[]
     count=0
@@ -58,35 +44,41 @@ def checklearner_for_prereq_list(list_of_prerequisites):
 
         else:
             learners=checklearner_per_prereq_list(prerequisite)
+            
             if(count==0):
                 learners_who_completed_prereq_list=learners
             else:
                 learners_who_completed_prereq_list=learners_who_completed_prereq_list.intersection(learners)
         
         count+=1
+    # print(learners["learners_who_completed_prereq_list"])
     return learners_who_completed_prereq_list
 
 
 #Step 2 check if learner complete prerequisite
 def checklearner_per_prereq_list(prerequisite):
-    #reqs=getreq()
-    # coursecomplete = complete_collection.find({"_id.course_id":reqs,"is_completed": bool("true")})
-
+   
     learnerAssignOrEnrol=LearnerAssignOrEnrolDAO()
     learners_completed=list(learnerAssignOrEnrol.find_query(query={"_id.course_id":prerequisite,"is_completed": bool("true")}))
-    #return list of learners that have completed this prerequisite
-    return learners_completed
-    #print(coursecomplete)
-    # for completedLearner in coursecomplete:
-    #     learnerUsername = completedLearner["_id"]["learner_username"]
-    #     return learnerUsername
+    learners_list=[]
+    for learner in learners_completed:
+        learners_list.append(learner.get_learner_username())
+    return learners_list
+  
 
-def getlearner():
-    learnerid=checklearner()
-    learnerdetails = learner_collection.find({"_id.username":learnerid})
+def getlearner(learners_met_prerequisites):
+    #learnerid=checklearner()
+    # learnerdetails = learner_collection.find({"_id.username":learnerid})
+    learnerDAO=LearnerDAO()
+    learnersdetails=[]
+    for learner in learners_met_prerequisites:
+       learner_obj=learnerDAO.find_one(learner_username=learner)
+       learner_dict={"name":learner_obj.get_name(), "username":learner}
+       learnersdetails.append(learner_dict)
+
     #for bLearner in learnerdetails:
         #return jsonify(bLearner)
-    return render_template('assign.html',  learners = learnerdetails)
+    return render_template('assign.html',  learners = learnersdetails)
 
 
 def getalllearners():
@@ -94,52 +86,60 @@ def getalllearners():
     return render_template('assign.html',  learners = alllearner)
 
 
-@app.route('/learners')
+@app.route('/assign_learners')
 #step 3: get all the learner details for display
-def choosefun():
+def check_if_course_needs_prereq():
+
     courseDAO=CourseDAO()
-    course_obj=courseDAO.find_one(dict({"_id.course_id":searchcourse}))
+    course_obj=courseDAO.find_one(course_id=searchcourse)
+    learners_met_prerequisites=checklearner_for_prereq_list(course_obj.get_course_prerequisites())
+    return getlearner(learners_met_prerequisites)
     
-    noreqr=checkreq(course_obj.get_course_prerequisites())
-         checklearner(course_obj.get_course_prerequisites())
-    if noreqr==False:
-        return getlearner() 
-    else:
-        return getalllearners()
+    
+    # noreqr=checkreq(course_obj.get_course_prerequisites())
+    #      checklearner(course_obj.get_course_prerequisites())
+    # if noreqr==False:
+    #     return getlearner() 
+    # else:
+    #     return getalllearners()
     
 
 
 #Step 1: Check for class available vacancies
-def getvaccancies():
-    vacanciesdetails = class_collection.find({"_id.course_id":searchcourse,"_id.class_id":theclass})
-    for vacant in vacanciesdetails:
-            res=vacant['class_available_slots']
-            return int(res)
+def getvaccancies(course_id, class_id):
+    classDAO=ClassDAO()
+    one_class_object=classDAO.find_one(class_id=class_id, course_id=course_id)
+    #vacanciesdetails = class_collection.find({"_id.course_id":searchcourse,"_id.class_id":theclass})
+    # for vacant in one_class_object:
+    res=one_class_object.get_class_available_slots()
+    print("this is res",res)
+    return int(res)
 
 #Step 3 Add learner into registered class          
-def update_learner_class(course_id,class_id,learner_username,admin_username):
-    classenroll = {"is_enrolment_approved": bool("true"), "is_completed": bool("false"), "_id":{"class_id": class_id,"course_id":course_id,
-		"learner_username": learner_username,
-        "admin_username": admin_username
-	}}
-    complete_collection.update_one(classenroll,{'$set':classenroll},upsert=True)
+def create_learner_assignment_class(course_id,class_id,learner_username,admin_username):
+
+    learnerAssignOrEnrol=LearnerAssignOrEnrol(learner_username=learner_username, admin_username=admin_username, class_id=class_id, course_id=course_id, is_enrolment_approved=True, is_completed=False)
+    learnerAssignOrEnrolDAO=LearnerAssignOrEnrolDAO()
+    learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
+    # complete_collection.update_one(classenroll,{'$set':classenroll},upsert=True)
     
-@app.route("/assign_learner/<course_id>/<class_id>/<learner_username>/<admin_username>", methods=["GET","PUT"])
+@app.route("/assign_learner/<string:course_id>/<string:class_id>/<string:learner_username>/<string:admin_username>", methods=["GET","PUT"])
 def update_class_course_information(course_id,class_id,learner_username, admin_username):
 
-    coursevacant= getvaccancies()
+    coursevacant= getvaccancies(course_id, class_id)
     if  coursevacant > 0:
         vacleft=coursevacant-1
-        class_collection.update_one({"_id": {
+        print(vacleft)
+        classDAO=ClassDAO()
+        classDAO.update_one(queryIdentifier={"_id": {
             "course_id": course_id,
             "class_id": class_id
-        }}, {"$set": {
+        }}, queryValues={"$set": {
             "class_available_slots": vacleft
         }})
-        update_learner_class(course_id,class_id,learner_username,admin_username)
+        create_learner_assignment_class(course_id,class_id,learner_username,admin_username)
         msg="Assign Learner Successful"
-        goback="https://localhost:5000/learners"
-        return render_template('assign.html', successmsg=msg, backlink=goback)
+        return render_template('assign.html', successmsg=msg)
         #return str("Completed")
     else:
         return str("Cannot update, due to no vacancies")
