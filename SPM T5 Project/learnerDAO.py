@@ -37,3 +37,4 @@ class LearnerDAO:
                          current_designation=one_learner["current_designation"])
 
         return learner
+

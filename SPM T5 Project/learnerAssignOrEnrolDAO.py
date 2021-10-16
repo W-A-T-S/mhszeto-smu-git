@@ -45,3 +45,12 @@ class LearnerAssignOrEnrolDAO:
                 }
             )
         )
+
+    def delete_one(self, class_id, course_id, learner_username):
+        self._collection.delete_one(
+            {
+                "_id.class_id": class_id,
+                "_id.course_id": course_id,
+                "_id.learner_username": learner_username,
+            }
+        )

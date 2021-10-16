@@ -19,6 +19,7 @@ connection = pymongo.MongoClient(
 db = connection["spm_aio_db"]
 CORS(app)
 
+"""
 course_collection = db["course"]
 coursereq_collection = db["coursePrerequisite"]
 learner_collection = db["learner"]
@@ -29,10 +30,9 @@ searchcourse = "CR102"
 theclass = "CL1"
 thelearner = "BobTheGuy"
 theadmin = "LarryThePaperChaser"
-
-
 # get all learners if the course does not require prerequisite
 noreq = ""
+"""
 
 
 def checklearner_for_prereq_list(list_of_prerequisites):
@@ -124,10 +124,7 @@ def check_if_course_needs_prereq(course_id, class_id):
 def getvaccancies(course_id, class_id):
     classDAO = ClassDAO()
     one_class_object = classDAO.find_one(class_id=class_id, course_id=course_id)
-    # vacanciesdetails = class_collection.find({"_id.course_id":searchcourse,"_id.class_id":theclass})
-    # for vacant in one_class_object:
     res = one_class_object.get_class_available_slots()
-    print(res)
     return int(res)
 
 

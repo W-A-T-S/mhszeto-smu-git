@@ -15,13 +15,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -53,65 +48,62 @@
     <header class="bg-secondary py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder"> Administrator Dashboard</h1>
+                <h1 class="display-4 fw-bolder"> Adminstrator Dashboard</h1>
                 <p class="lead fw-normal text-white-50 mb-0"> Review Request, Assign Learners, Assign Trainers </p>
             </div>
         </div>
     </header>
 
-    <br>
+    <br><br>
+
     <!-- Section-->
-    <div class="container">
-        <div class="row">
-            <h3 class="col-md-8">{{introText}}</h3>
-            <button class="btn btn-info col-md-4"
-                onclick="location.href='http://127.0.0.1:5003/create_class/{{currentCourse}}'">Create
-                Class for {{currentCourse}}</button>
-        </div>
-        <br><br><br>
+    <div class="container" id="test">
 
+        <h4>{{successmsg}}</h4>
+        <p><a href="http://127.0.0.1:5000/learners">Back</a></p>
+        <!-- Available Learner Table -->
+        <table class="table table-condensed" id="removeLearnerTable">
+            <thead class="table-info">
+                <tr>
+                    <th>Learner ID</th>
+                    <th>Learner Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <!-- For Classes of a Course -->
-        {% for classInfo in classDetails %}
-        <div class="row">
-            <h4 class="col-md-8">{{classInfo[1]}}</h4>
-            <button class="btn btn-info col-md-4" onclick="">View Self-Enrollment Requests for {{classInfo[1]}}</button>
-        </div>
-        <hr />
-        <div class="row">
-            <p style="font-size:19px" class="col-md-10"><span class="fw-bold">Trainer:</span> {{classInfo[2]}}</p>
-            <button class="btn btn-info col-md-2"
-                onclick="location.href='http://127.0.0.1:5002/assign_trainer/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
-                Trainer</button>
-        </div>
-        <br>
-        <div class="row">
-            <p style="font-size:19px" class="fw-bold col-md-1">Learners:</p>
-            <div class="dropdown col-md-7">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    View Learners
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {% for learner in classInfo[3] %}
-                    <li><a class="dropdown-item" href="#">{{learner}}</a></li>
-                    {% endfor %}
-                </ul>
+                {% for learner in learnerInfo %}
+                <tr>
+                    <td class="nr">{{learner.username}}</td>
+                    <td>{{learner.name}}</td>
+                    <td> <button type="button" id="learnerid" class="btn btn-info" data-bs-toggle="modal"
+                            data-bs-target="#removeLearnerModal">Select </button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Assign Learner Modal -->
+        <div class="modal fade" id="removeLearnerModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="approveModalLabel">Action Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want to confirm this action?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="assignbtn">Remove</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-info col-md-2"
-                onclick="location.href='http://127.0.0.1:5001/assignlearners/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
-                Learners</button>
-            <button class="btn btn-danger col-md-2"
-                onclick="location.href='http://127.0.0.1:5004/displayclasslearner/{{classInfo[0]}}/{{classInfo[1]}}'">Withdraw
-                Learners</button>
         </div>
-        <br><br><br><br>
 
-        {% endfor %}
-
-
-        <button type="button" class="btn btn-secondary" onclick="goBack()">Go Back</button>
     </div>
+
 
     <br><br>
 
@@ -122,6 +114,19 @@
         </div>
     </footer>
 
+
+    <script>
+        var id;
+        //onclick="location.href='http://localhost:5000/classes/CR101/CL1/'+'id'+'/'+adminid +'"
+        $("#learnerid").click(function () {
+            var id = $(this).closest("tr").find(".nr").text();
+        });
+
+        $("#assignbtn").click(function () {
+            location.replace("http://127.0.0.1:5000/assign_learner/CR101/CL1/" + id + "/LarryThePaperChaser")
+        });
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
