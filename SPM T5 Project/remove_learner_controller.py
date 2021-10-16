@@ -123,7 +123,7 @@ def withdraw_learner(course_id, class_id, learner_username):
     classDAO = ClassDAO()
     classDAO.update_one(
         queryIdentifier={"_id": {"course_id": course_id, "class_id": class_id}},
-        queryValues={"$inc": {"class_available_slots": -1}},
+        queryValues={"$inc": {"class_available_slots": 1}},
     )
     # except
 

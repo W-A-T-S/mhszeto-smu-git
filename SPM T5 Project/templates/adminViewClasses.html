@@ -93,7 +93,7 @@
                     View Learners
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {% for learner in classInfo %}
+                    {% for learner in classInfo[3] %}
                     <li><a class="dropdown-item" href="#">{{learner}}</a></li>
                     {% endfor %}
                 </ul>
