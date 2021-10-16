@@ -93,16 +93,18 @@ def display_class_course_information(course_id, class_id):
     learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
 
     many_assignment_objects = learnerAssignOrEnrolDAO.find_query(
-        query={"_id": {"course_id": course_id, "class_id": class_id}}
+        query={"_id.course_id": course_id, "_id.class_id": class_id}
     )
-
+    
     learner_list = []
-    for displayobj in many_assignment_objects:
+    for one_assignment_object in many_assignment_objects:
         learnerDAO = LearnerDAO()
-        learner_obj = learnerDAO.find_one(displayobj.get_learner_username)
+        learner_obj = learnerDAO.find_one( learner_username=one_assignment_object .get_learner_username())
+
         learner_list.append(
             {"username": learner_obj.get_username(), "name": learner_obj.get_name()}
         )
+
     return render_template("removeLearner.html", learnerInfo=learner_list)
 
 
