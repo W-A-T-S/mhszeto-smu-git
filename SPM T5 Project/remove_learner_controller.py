@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template,redirect
 import pymongo
 from flask_cors import CORS
 from learnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
@@ -105,7 +105,7 @@ def display_class_course_information(course_id, class_id):
             {"username": learner_obj.get_username(), "name": learner_obj.get_name()}
         )
 
-    return render_template("removeLearner.html", learnerInfo=learner_list)
+    return render_template("removeLearner.html", learnerInfo=learner_list, course_id=course_id, class_id=class_id)
 
 
 @app.route(
@@ -127,7 +127,7 @@ def withdraw_learner(course_id, class_id, learner_username):
     )
     # except
 
-    return "Delete Learner Successful"
+    return redirect(f"http://127.0.0.1:5004/displayclasslearner/{course_id}/{class_id}")
 
 
 if __name__ == "__main__":

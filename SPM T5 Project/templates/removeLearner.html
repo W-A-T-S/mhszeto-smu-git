@@ -76,31 +76,13 @@
                 <tr>
                     <td class="nr">{{learner.username}}</td>
                     <td>{{learner.name}}</td>
-                    <td> <button type="button" id="learnerid" class="btn btn-info"  onclick="location.href='http://127.0.0.1:5004/'">Select </button></td>
+                    <td> <button type="button" id="learnerid" class="btn btn-info"  onclick="location.href='http://127.0.0.1:5004/withdraw_learners/{{course_id}}/{{class_id}}/{{learner.username}}'">Select </button></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <!-- Assign Learner Modal -->
-        <div class="modal fade" id="removeLearnerModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="approveModalLabel">Action Confirmation</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Do you want to confirm this action?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="assignbtn">Remove</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      
     </div>
 
 
@@ -117,10 +99,7 @@
     <script>
       
 
-        $("#assignbtn").click(function () {
-            location.replace("http://127.0.0.1:5004/withdraw_learner/CR101/CL1/" + id + "/LarryThePaperChaser")
-        });
-        /withdraw_learners/<string:course_id>/<string:class_id>/<string:learner_username>
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
