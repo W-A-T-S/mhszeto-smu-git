@@ -34,7 +34,6 @@ theadmin = "LarryThePaperChaser"
 noreq = ""
 """
 
-
 def checklearner_for_prereq_list(list_of_prerequisites):
     learners_who_completed_prereq_list = []
     count = 0
