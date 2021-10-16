@@ -28,3 +28,24 @@ class LearnerAssignOrEnrolDAO:
             many_assignments_list.append(one_assignment_object)
         return many_assignments_list
 
+    def insert_one(self, one_assignment_obj):
+
+        self._collection.insert_one(
+            dict(
+                {
+                    "_id": {
+                        "learner_username": one_assignment_obj.get_learner_username(),
+                        "admin_username": one_assignment_obj.get_admin_username(),
+                        "class_id": one_assignment_obj.get_class_id(),
+                        "course_id": one_assignment_obj.get_course_id(),
+                    },
+                    "is_enrolment_approved": True,
+                    "is_completed": False,
+                }
+            )
+        )
+    
+        
+
+        
+
