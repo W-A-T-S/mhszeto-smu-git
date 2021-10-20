@@ -4,14 +4,14 @@ import sys
 import pymongo
 from datetime import datetime
 
-sys.path.append("../../SPM T5 Project")
+sys.path.append("../../../SPM T5 Project/user")
 from classDAO import ClassDAO
 
-sys.path.append("../../SPM T5 Project")
+sys.path.append("../../../SPM T5 Project/user")
 from classDomain import Class
 
 
-class testClassDOA(unittest.TestCase):
+class testClassDAO(unittest.TestCase):
     def setUp(self):
         self._classDAO = ClassDAO()
         self._sampleClass = Class(
@@ -257,3 +257,5 @@ class testClassDOA(unittest.TestCase):
             result["modified_count"],
             1.0,
         )
+if __name__ == "__main__":
+    unittest.main()

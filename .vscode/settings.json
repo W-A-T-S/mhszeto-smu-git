@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./SPM T5 Project",
+        "./test",
         "-p",
         "test*.py"
     ],
