@@ -28,7 +28,7 @@ class TestTrainerDAO(unittest.TestCase):
 
         self.__sampleTrainerListDict = [
             {
-                "_id": {"username": "JaneTheEngineer"},
+                "_id": {"username": "JaneTheEnginee"},
                 "name": "Jane Smith",
                 "current_designation": "Senior Engineer",
                 "is_trainer": True,
