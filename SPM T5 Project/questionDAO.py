@@ -1,5 +1,5 @@
 import pymongo
-from quizDomain import Quiz
+from questionDomain import Question
 
 class QuestionDAO:
     def __init__(self):
@@ -50,7 +50,7 @@ class QuestionDAO:
         return question
 
     def insert_one(self, question):
-        one_learner = self._collection.insert_one(dict({
+        self._collection.insert_one(dict({
             "_id" : {
                 "question_id" :  question.get_question_id(),
                 "class_id" : question.get_class_id(),
@@ -61,6 +61,7 @@ class QuestionDAO:
             "options" : question.get_options(),
             "answer" : question.get_answer()
         }))
-        return 
+
+        return
 
 
