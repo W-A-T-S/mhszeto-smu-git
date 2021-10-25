@@ -8,9 +8,9 @@ from classDAO import ClassDAO
 app = Flask(__name__)
 
 
-# def getalllearners(course_id, class_id):
-#     alllearner = learner_collection.find({})
-#     return render_template("admin.html", learners=alllearner)
+def getalllearners(course_id, class_id):
+    alllearner = learner_collection.find({})
+    return render_template("admin.html", learners=alllearner)
 
 
 @app.route(
