@@ -20,7 +20,7 @@ def create_quiz():
     quizDAO = QuizDAO()
     passing_percentage = int(request.json["passing_percentage"])
     lesson_id = request.json["lesson_id"]
-    if bool(int(request.json["is_final"])):
+    if request.json["is_final"]:
         lesson_id = None
     else:
         passing_percentage = 0
@@ -33,7 +33,7 @@ def create_quiz():
         description=request.json["description"],
         time_limit=int(request.json["time_limit"]),
         passing_percentage=passing_percentage,
-        is_final=bool(int(request.json["is_final"])),
+        is_final=request.json["is_final"],
     )
     quizDAO.insert_one(one_quiz_object)
 
