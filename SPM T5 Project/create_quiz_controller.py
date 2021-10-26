@@ -38,7 +38,7 @@ def create_quiz():
         is_final=bool(int(request.json["is_final"]))
     )
     quizDAO.insert_one(one_quiz_object)
-    print("Hello")
+    
     # Question
     for question in request.json["questions"]:
         question= Question( 
