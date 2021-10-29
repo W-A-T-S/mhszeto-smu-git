@@ -58,8 +58,8 @@ def create_class():
 
     print(dateutil.parser.isoparse(request.form["enrolment_open_date"]))
     print(type(request.form["enrolment_open_date"]))
-    print("------------------------------------------------")
-    print(request.form)
+    # print("------------------------------------------------")
+    # print(request.form)
     
     one_class_object = Class(
         course_id=request.form["course_id"].upper(),
