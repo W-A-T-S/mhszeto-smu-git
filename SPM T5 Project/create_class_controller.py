@@ -20,43 +20,43 @@ def all_class(course_id):
 # create new class
 @app.route("/create_class", methods=["POST"])
 def create_class():
-    try:
+    # try:
 
-        classDAO = ClassDAO()
+    classDAO = ClassDAO()
 
-        print(dateutil.parser.isoparse(request.form["enrolment_open_date"]))
-        print(type(request.form["enrolment_open_date"]))
-        # print("------------------------------------------------")
-        # print(request.form)
-        
-        one_class_object = Class(
-            course_id=request.form["course_id"].upper(),
-            class_id=request.form["class_id"].upper(),
-            trainer_name=None,
-            trainer_username=None,
-            # KIV admin username can be hardcoded
-            admin_username=request.form["admin_username"],
-            enrolment_open_date=dateutil.parser.isoparse(
-                request.form["enrolment_open_date"]
-            ),
-            enrolment_close_date=dateutil.parser.isoparse(
-                request.form["enrolment_close_date"]
-            ),
-            start_date_time=dateutil.parser.isoparse(request.form["start_date_time"]),
-            end_date_time=dateutil.parser.isoparse(request.form["end_date_time"]),
-            class_size=int(request.form["class_size"]),
-            class_available_slots=int(request.form["class_available_slots"]),
-        )
+    print(dateutil.parser.isoparse(request.form["enrolment_open_date"]))
+    print(type(request.form["enrolment_open_date"]))
+    # print("------------------------------------------------")
+    # print(request.form)
+    
+    one_class_object = Class(
+        course_id=request.form["course_id"].upper(),
+        class_id=request.form["class_id"].upper(),
+        trainer_name=None,
+        trainer_username=None,
+        # KIV admin username can be hardcoded
+        admin_username=request.form["admin_username"],
+        enrolment_open_date=dateutil.parser.isoparse(
+            request.form["enrolment_open_date"]
+        ),
+        enrolment_close_date=dateutil.parser.isoparse(
+            request.form["enrolment_close_date"]
+        ),
+        start_date_time=dateutil.parser.isoparse(request.form["start_date_time"]),
+        end_date_time=dateutil.parser.isoparse(request.form["end_date_time"]),
+        class_size=int(request.form["class_size"]),
+        class_available_slots=int(request.form["class_available_slots"]),
+    )
 
-        classDAO.insert_one(one_class_object)
+    classDAO.insert_one(one_class_object)
 
 
-        return redirect(f'http://18.234.140.174:5000/classes/{request.form["course_id"]}')
-    except:
-        return (
-            jsonify({"code": 400, "msg": "Failed Creating class and course!"}),
-            400,
-        )
+    return redirect(f'http://18.234.140.174:5000/classes/{request.form["course_id"]}')
+    # except:
+        # return (
+        #     jsonify({"code": 400, "msg": "Failed Creating class and course!"}),
+        #     400,
+        # )
 
 
 if __name__ == "__main__":
