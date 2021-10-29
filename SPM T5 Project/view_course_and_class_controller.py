@@ -6,8 +6,6 @@ from learnerDAO import LearnerDAO
 from learnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
 import pymongo
 
-myclient = pymongo.MongoClient("mongodb://spm_team:spmbestteam@18.136.194.180:27017/")
-spmDatabase = myclient["spm_aio_db"]
 
 app = Flask(__name__)
 

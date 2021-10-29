@@ -45,9 +45,8 @@ class MaterialCheckDAO:
         )
         return one_material_check_object
 
+    def update_one(self, queryIdentifier, queryValues):
+        self._collection.update_one(queryIdentifier, queryValues)
 
-    def update_one(self, query, new_value):
+        return "updated"
 
-        test = self._collection.update_one(query, new_value)
-
-        return 
