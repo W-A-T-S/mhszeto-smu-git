@@ -11,9 +11,6 @@ import dateutil.parser
 
 app = Flask(__name__)
 
-
-
-
 # create new class
 @app.route("/create_class", methods=["POST"])
 def create_class():
