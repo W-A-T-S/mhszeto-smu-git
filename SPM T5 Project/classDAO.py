@@ -53,6 +53,7 @@ class ClassDAO:
             class_size=one_class["class_size"],
             class_available_slots=one_class["class_available_slots"],
         )
+        
         return one_class_object
 
     def find_query(self, query):
