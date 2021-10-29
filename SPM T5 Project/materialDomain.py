@@ -1,4 +1,4 @@
-class MaterialCheck:
+class Material:
     def __init__(self, material_id="", lesson_id="", course_id="", class_id="", title="", description="", material_type="", url=""):
         self._material_id = material_id
         self._lesson_id = lesson_id

@@ -18,7 +18,6 @@ app = Flask(__name__)
     methods=["GET"],
 )
 def display_class_course_information(course_id, class_id):
-
     learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
 
     many_assignment_objects = learnerAssignOrEnrolDAO.find_query(
@@ -56,8 +55,9 @@ def withdraw_learner(course_id, class_id, learner_username):
     )
     # except
 
-    return redirect(f"http://127.0.0.1:5004/displayclasslearner/{course_id}/{class_id}")
+    # return redirect(f"http://18.234.140.174:5004/displayclasslearner/{course_id}/{class_id}")
+    return redirect(f'http://18.234.140.174:5000/displayclasslearner/{course_id}/{class_id}')
 
 
 if __name__ == "__main__":
-    app.run(port="5004", debug=True)
+    app.run(host='0.0.0.0',port="5004", debug=True)

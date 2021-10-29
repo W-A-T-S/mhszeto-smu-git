@@ -54,3 +54,7 @@ class LearnerAssignOrEnrolDAO:
                 "_id.learner_username": learner_username,
             }
         )
+
+    def update_one(self, queryIdentifier, queryValues):
+        res = self._collection.update_one(queryIdentifier, queryValues)
+        return res
