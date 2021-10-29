@@ -1,9 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from flask_cors import CORS
 from functools import wraps
-
-# from flask_pymongo import PyMongo
-from flask_pymongo import pymongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -14,39 +11,7 @@ import dateutil.parser
 
 app = Flask(__name__)
 
-myclient = pymongo.MongoClient("mongodb://spm_team:spmbestteam@18.136.194.180:27017/")
-spmDatabase = myclient["spm_aio_db"]
 
-app.config["SQLALCHEMY_DATABASE_URI"] = environ.get(
-    "mongodb://spm_team:spmbestteam@18.136.194.180:27017/"
-)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-connection = pymongo.MongoClient(
-    "18.136.194.180",
-    username="spm_team",
-    password="spmbestteam",
-    authSource="admin",
-    authMechanism="SCRAM-SHA-256",
-)
-db = connection["spm_aio_db"]
-collection = db["class"]
-
-# display all classes
-@app.route("/create_class/<string:course_id>", methods=["GET"])
-def all_class(course_id):
-    all_class = collection.find()
-    return render_template(
-        "create_class.html", all_class=all_class, course_id=course_id
-    )
-
-
-# # Select one class to display according to specified id
-# @app.route("/each_class/<id>", methods=["GET"])
-# def each_class(id):
-#     each_class = collection.find_one({"_id": ObjectId()})
-#     resp = dumps(all_class)
-#     return resp
 
 
 # create new class
