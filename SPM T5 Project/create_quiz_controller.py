@@ -51,7 +51,7 @@ def create_quiz():
         questionDAO = QuestionDAO()
         questionDAO.insert_one(question)
 
-    # return redirect(f'http://127.0.0.1:5000/classes/{request.form["course_id"]}'
+
     return "Successful!"
 
     # except:
@@ -62,4 +62,4 @@ def create_quiz():
 
 
 if __name__ == "__main__":
-    app.run(port="5006", debug=True)
+    app.run(host="0.0.0.0",port="5006", debug=True)

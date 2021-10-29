@@ -71,16 +71,27 @@
                         <th scope="col">Description</th>
                         <th scope="col">Type</th>
                         <th scope="col">View</th>
+                        <th scope="col">Completed</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for material in lessons.materials %}
+                    {% for material in lesson.materials %}
                     <tr>
                         <td>{{material.material_id}}</td>
                         <td>{{material.title}}</td>
                         <td>{{material.description}}</td>
                         <td>{{material.type}}</td>
                         <td><a href="{{material.url}}">View Material</a></td>
+                        {% if material.is_completed==True %}
+                        <td><input type="checkbox" id="vehicle3" onchange="update_material(this)"
+                            value="{{material.material_id}},{{lesson.lesson_id}},{{lesson.course_id}},{{lesson.learner_username}},{{lesson.class_id}}" checked>
+                        </td>
+                        {% else %}
+                        <td><input type="checkbox" id="vehicle3" onchange="update_material(this)"
+                            value="{{material.material_id}},{{lesson.lesson_id}},{{lesson.course_id}},{{lesson.learner_username}},{{lesson.class_id}}">
+                        </td>
+                        {% endif %}
+                      
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -97,6 +108,29 @@
             <p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p>
         </div>
     </footer>
+    <script>
+        function update_material(checkbox) {
+            const material_id = checkbox.value.split(",")[0]
+            const lesson_id = checkbox.value.split(",")[1]
+            const course_id = checkbox.value.split(",")[2]
+            const learner_username = checkbox.value.split(",")[3]
+            const class_id = checkbox.value.split(",")[4]
+            if (checkbox.checked == true) {
+                fetch(`/update_material_completed/${material_id}/${class_id}/${course_id}/${lesson_id}/${learner_username}`)
+                    .then((raw) => { window.location.reload(false);  })
+                
+                return
+            } else if(checkbox.checked == false) {
+                fetch(`/update_material_incomplete/${material_id}/${class_id}/${course_id}/${lesson_id}/${learner_username}`)
+                    .then((raw) => { window.location.reload(false); })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
+                
+                return
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>

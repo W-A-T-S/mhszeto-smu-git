@@ -19,20 +19,7 @@ connection = pymongo.MongoClient(
 db = connection["spm_aio_db"]
 CORS(app)
 
-"""
-course_collection = db["course"]
-coursereq_collection = db["coursePrerequisite"]
-learner_collection = db["learner"]
-class_collection = db["class"]
-complete_collection = db["learnerAssignOrEnrol"]
 
-searchcourse = "CR102"
-theclass = "CL1"
-thelearner = "BobTheGuy"
-theadmin = "LarryThePaperChaser"
-# get all learners if the course does not require prerequisite
-noreq = ""
-"""
 
 def checklearner_for_prereq_list(list_of_prerequisites):
     learners_who_completed_prereq_list = []
@@ -85,7 +72,7 @@ def getlearner(learners_met_prerequisites, course_id, class_id):
     # for bLearner in learnerdetails:
     # return jsonify(bLearner)
     return render_template(
-        "assign.html", learners=learnersdetails, course_id=course_id, class_id=class_id
+        "ssign.html", learners=learnersdetails, course_id=course_id, class_id=class_id
     )
 
 
@@ -176,4 +163,4 @@ def update_class_course_information(
 
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
