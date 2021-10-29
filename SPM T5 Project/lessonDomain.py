@@ -1,8 +1,10 @@
 class Lesson:
     def __init__(self, lesson_id="", class_id="", course_id="",title ="", description = ""):
-        self.lesson_id = lesson_id
-        self.class_id = class_id
-        self.course_id = course_id
+        self._lesson_id = lesson_id
+        self._class_id = class_id
+        self._course_id = course_id
+        self._title = title
+        self._description = description
 
     def get_lesson_id(self):
         return self._lesson_id
