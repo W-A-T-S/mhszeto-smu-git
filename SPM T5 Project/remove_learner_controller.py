@@ -56,7 +56,7 @@ def withdraw_learner(course_id, class_id, learner_username):
     # except
 
     # return redirect(f"http://18.234.140.174:5004/displayclasslearner/{course_id}/{class_id}")
-    return redirect(f'http://18.234.140.174:5000/displayclasslearner/{course_id}/{class_id}')
+    return redirect(f'http://18.234.140.174:5000/classes/{course_id}')
 
 
 if __name__ == "__main__":

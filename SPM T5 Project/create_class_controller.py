@@ -23,7 +23,6 @@ def create_class():
     try:
 
         classDAO = ClassDAO()
-
         print(dateutil.parser.isoparse(request.form["enrolment_open_date"]))
         print(type(request.form["enrolment_open_date"]))
         # print("------------------------------------------------")
@@ -49,8 +48,6 @@ def create_class():
         )
 
         classDAO.insert_one(one_class_object)
-
-
         return redirect(f'http://18.234.140.174:5000/classes/{request.form["course_id"]}')
     except:
         return (
