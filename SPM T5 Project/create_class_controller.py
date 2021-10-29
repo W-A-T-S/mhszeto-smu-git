@@ -11,6 +11,13 @@ import dateutil.parser
 
 app = Flask(__name__)
 
+@app.route("/create_class/<string:course_id>", methods=["GET"])
+def all_class(course_id):
+    all_class = collection.find()
+    return render_template(
+        "create_class.html", all_class=collection.find(), course_id=course_id
+    )
+
 # create new class
 @app.route("/create_class", methods=["POST"])
 def create_class():
