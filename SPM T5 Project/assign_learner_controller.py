@@ -157,6 +157,7 @@ def update_class_course_information(
             "assign.html",
             successmsg=msg,
         )
+        #return redirect(f'http://18.234.140.174:5000/classes/{course_id}')
      
         # return str("Completed")
     else:
