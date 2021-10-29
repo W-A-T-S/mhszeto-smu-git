@@ -157,6 +157,7 @@ def update_class_course_information(
             "assign.html",
             successmsg=msg,
         )
+     
         # return str("Completed")
     else:
         return str("Cannot update, due to no vacancies")
