@@ -13,9 +13,8 @@ app = Flask(__name__)
 
 @app.route("/create_class/<string:course_id>", methods=["GET"])
 def all_class(course_id):
-    all_class = collection.find()
     return render_template(
-        "create_class.html", all_class=collection.find(), course_id=course_id
+        "create_class.html", course_id=course_id
     )
 
 # create new class
