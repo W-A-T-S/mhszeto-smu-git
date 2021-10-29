@@ -114,4 +114,4 @@ def update_class_course_information(course_id, class_id):
 
 
 if __name__ == "__main__":
-    app.run(port=5002, debug=True)
+    app.run(host= "0.0.0.0",port=5002, debug=True)
