@@ -9,7 +9,7 @@ from classDAO import ClassDAO
 from classDomain import Class
 import dateutil.parser
 
-app = Flask(__name__,render_template="./Templates")
+app = Flask(__name__,template_folder="./Templates")
 
 @app.route("/create_class/<string:course_id>", methods=["GET"])
 def all_class(course_id):
