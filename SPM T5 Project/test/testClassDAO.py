@@ -4,10 +4,10 @@ import sys
 import pymongo
 from datetime import datetime
 
-sys.path.append("../../../SPM T5 Project/user")
+sys.path.append("../../SPM T5 Project")
 from classDAO import ClassDAO
 
-sys.path.append("../../../SPM T5 Project/user")
+sys.path.append("../../SPM T5 Project")
 from classDomain import Class
 
 
