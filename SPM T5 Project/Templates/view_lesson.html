@@ -84,16 +84,30 @@
                         <td><a href="{{material.url}}">View Material</a></td>
                         {% if material.is_completed==True %}
                         <td><input type="checkbox" id="vehicle3" onchange="update_material(this)"
-                            value="{{material.material_id}},{{lesson.lesson_id}},{{lesson.course_id}},{{lesson.learner_username}},{{lesson.class_id}}" checked>
+                                value="{{material.material_id}},{{lesson.lesson_id}},{{lesson.course_id}},{{lesson.learner_username}},{{lesson.class_id}}"
+                                checked>
                         </td>
                         {% else %}
                         <td><input type="checkbox" id="vehicle3" onchange="update_material(this)"
-                            value="{{material.material_id}},{{lesson.lesson_id}},{{lesson.course_id}},{{lesson.learner_username}},{{lesson.class_id}}">
+                                value="{{material.material_id}},{{lesson.lesson_id}},{{lesson.course_id}},{{lesson.learner_username}},{{lesson.class_id}}">
                         </td>
                         {% endif %}
-                      
+
                     </tr>
                     {% endfor %}
+                    <tr>
+                        <td>Lesson Quiz</td>
+                        <td><a class="btn btn-info"
+                                href="http://localhost:5008/view_quiz/{{lesson.class_id}}/{{lesson.course_id}}/{{lesson.lesson_id}}">Go
+                                to
+                                Quiz</a></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -117,16 +131,16 @@
             const class_id = checkbox.value.split(",")[4]
             if (checkbox.checked == true) {
                 fetch(`/update_material_completed/${material_id}/${class_id}/${course_id}/${lesson_id}/${learner_username}`)
-                    .then((raw) => { window.location.reload(false);  })
-                
+                    .then((raw) => { window.location.reload(false); })
+
                 return
-            } else if(checkbox.checked == false) {
+            } else if (checkbox.checked == false) {
                 fetch(`/update_material_incomplete/${material_id}/${class_id}/${course_id}/${lesson_id}/${learner_username}`)
                     .then((raw) => { window.location.reload(false); })
                     .catch((error) => {
-                    console.error('Error:', error);
+                        console.error('Error:', error);
                     });
-                
+
                 return
             }
         }
