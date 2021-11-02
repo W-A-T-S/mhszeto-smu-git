@@ -86,7 +86,18 @@
                 <p style="font-size:19px" class="">Period: {{course.start_datetime}} to {{course.end_datetime}}</p>
             </div>
             <div class="col-md-2">
-            <a class="btn btn-info"href="http://18.234.140.174:5009/view_lesson/{{course.class_id}}/{{course.course_id}}/{{course.learner_username}}">Go to class</a>
+                <a class="btn btn-info"
+                    href="http://18.234.140.174:5009/view_lesson/{{course.class_id}}/{{course.course_id}}/{{course.learner_username}}">Go
+                    to class</a>
+                {% if course.lesson_count == "100.0" %}
+                <a class="btn btn-info mt-2"
+                    href="http://18.234.140.174:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
+                    to Final Quiz</a>
+                {% else %}
+                <a class="btn btn-info mt-2 disabled"
+                    href="http://18.234.140.174:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
+                    to Final Quiz</a>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
