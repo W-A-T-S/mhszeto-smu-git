@@ -1,216 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIO Learning Management System</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIO Learning Management System</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
-    crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    var quiz = JSON.parse(`{{quiz| safe}}`);
+    var allQuestions = quiz.question_list;
+    console.log(quiz)
+  </script>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <div class="container">
-            <a class="navbar-brand" href="#">AIO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a></li>
-            
-                
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome, Learner!</a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-      <!-- Header-->
-      <header class="bg-secondary py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder"> Trainer Dashboard</h1>
-                <p class="lead fw-normal text-white-50 mb-0"> Managing The Learner's Experience</p>
-            </div>
-        </div>
-    </header>
-
-    <br><br>
-    <!-- Section-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container">
-       
-   
-     
+      <a class="navbar-brand" href="#">AIO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a></li>
 
-        <h1>Attempt Quiz</h1>
-        <button type="button" class="btn btn-info" id="start">Start Quiz</button>
-        <br/>
-        <div id="container">
-          <h3 id="question"></h3>
-          <form id="form">
-            
-          </form>
-        
-          <br/>
-          <button type="button" class="btn btn-info" id="next">Next Question</button>
 
-    
-        </div>
-     
-        <div id="result"></div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Welcome, Learner!</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
- 
+  <!-- Header-->
+  <header class="bg-secondary py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder"> Trainer Dashboard</h1>
+        <p class="lead fw-normal text-white-50 mb-0"> Managing The Learner's Experience</p>
+      </div>
+    </div>
+  </header>
+
+  <br><br>
+  <!-- Section-->
+  <div class="container">
+
+
+
+
+    <h1>Attempt Quiz</h1>
+    <p id="timer"></p>
+    <button type="button" class="btn btn-info" id="start">Start Quiz</button>
+    <br />
+    <div id="container">
+      <h3 id="question"></h3>
+      <form id="form">
+
+      </form>
+
+      <br />
+      <button type="button" class="btn btn-info" id="next">Next Question</button>
+
 
     </div>
 
+    <div id="result"></div>
 
-    <br><br>
-    <!-- Footer-->
-    <footer class="py-5">
-        <div class="container"><p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p></div>
-    </footer>
-    
 
-    <script>
-      
-    var allQuestions = [{
-    question: "Who is the Prime Minister of the United Kingdom?",
-    choices: ["David Cameron", "Gordon Brown"],
-    correctAnswer: 0
-  },
 
-  
-  {
-    question: "Who is the Prime Minister of India?",
-    choices: ["Rahul Gandhi", "Arvind Kejrival", "Narendra Damodardas Modi","Dr.Manmohan Singh"],
-    correctAnswer: 2
-  },
+  </div>
 
-  {
-    question: "Who is the Prime Minister of America?",
-    choices: ["Donald Trump", "Barack Obama", "Hilary Clinton"],
-    correctAnswer: 1
-  },
 
-  {
-    question: " Who averaged one patent for every three weeks of his life?",
-    choices: ["Thomas Edison", "Tesla", "Einstein"],
-    correctAnswer: 0
-  },
+  <br><br>
+  <!-- Footer-->
+  <footer class="py-5">
+    <div class="container">
+      <p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p>
+    </div>
+  </footer>
 
-  {
-    question: "What continent is cut into two fairly equal halves by the Tropic of Capricorn?",
-    choices: ["Africa", "South America", "Australia"],
-    correctAnswer: 2
-  },
 
-  {
-    question: "What explorer introduced pigs to North America?",
-    choices: ["Christopher Columbus", "Galileo", "Mussorie"],
-    correctAnswer: 0
-  },
+  <script>
 
-  {
-    question: "What F-word is defined in physics as a “nuclear reaction in which nuclei combine to form more massive nuclei”? ",
-    choices: ["Furnace", "Fusion", "Fission"],
-    correctAnswer: 1
-  },
+    // var allQuestions = [{
+    //   question: "Who is the Prime Minister of the United Kingdom?",
+    //   choices: ["David Cameron", "Gordon Brown"],
+    //   correctAnswer: 0
+    // },
 
-  {
-    question: "What was the first planet to be discovered using the telescope, in 1781?",
-    choices: ["Uranus", "Jupiter", "Mars"],
-    correctAnswer: 0
-  },
 
-  {
-    question: "Who is the chief minister of West Bengal, India?",
-    choices: ["Buddhadev Bhattacharya", "Jyoti Basu", "Mamta Banerjee"],
-    correctAnswer: 2
-  },
+    // {
+    //   question: "Who is the Prime Minister of India?",
+    //   choices: ["Rahul Gandhi", "Arvind Kejrival", "Narendra Damodardas Modi", "Dr.Manmohan Singh"],
+    //   correctAnswer: 2
+    // },
 
-  {
-    question: "Which is the fastest growing religion in the world?",
-    choices: ["Islam", "Christianity", "Hinduism"],
-    correctAnswer: 0
-  }
-];
+    // {
+    //   question: "Who is the Prime Minister of America?",
+    //   choices: ["Donald Trump", "Barack Obama", "Hilary Clinton"],
+    //   correctAnswer: 1
+    // },
 
-var currentquestion = 0;
-var correctAnswers = 0;
-function checkAns(){
-    if ($("input[name=option]:checked").val() == allQuestions[currentquestion].correctAnswer) {
-      correctAnswers++;
-    };
-}
-function setupOptions(){
+    // {
+    //   question: " Who averaged one patent for every three weeks of his life?",
+    //   choices: ["Thomas Edison", "Tesla", "Einstein"],
+    //   correctAnswer: 0
+    // },
+
+    // {
+    //   question: "What continent is cut into two fairly equal halves by the Tropic of Capricorn?",
+    //   choices: ["Africa", "South America", "Australia"],
+    //   correctAnswer: 2
+    // },
+
+    // {
+    //   question: "What explorer introduced pigs to North America?",
+    //   choices: ["Christopher Columbus", "Galileo", "Mussorie"],
+    //   correctAnswer: 0
+    // },
+
+    // {
+    //   question: "What F-word is defined in physics as a “nuclear reaction in which nuclei combine to form more massive nuclei”? ",
+    //   choices: ["Furnace", "Fusion", "Fission"],
+    //   correctAnswer: 1
+    // },
+
+    // {
+    //   question: "What was the first planet to be discovered using the telescope, in 1781?",
+    //   choices: ["Uranus", "Jupiter", "Mars"],
+    //   correctAnswer: 0
+    // },
+
+    // {
+    //   question: "Who is the chief minister of West Bengal, India?",
+    //   choices: ["Buddhadev Bhattacharya", "Jyoti Basu", "Mamta Banerjee"],
+    //   correctAnswer: 2
+    // },
+
+    // {
+    //   question: "Which is the fastest growing religion in the world?",
+    //   choices: ["Islam", "Christianity", "Hinduism"],
+    //   correctAnswer: 0
+    // }
+    // ];
+
+    var currentquestion = 0;
+    var correctAnswers = 0;
+    function checkAns() {
+      var selectedans = document.querySelector('input[name="option"]:checked').value;
+
+      if (Number(selectedans) + 1 == allQuestions[currentquestion].correctAnswer) {
+        correctAnswers++;
+      };
+    }
+    function setupOptions() {
+
       $('#question').html(allQuestions[currentquestion].question);
       var options = allQuestions[currentquestion].choices;
-      var formHtml ='';
-      for (var i = 0; i < options.length; i++){
-        formHtml += '<div><input type="radio" name="option" value="'+i+'" id="option'+i+'"><label for="option'+i+'">'+allQuestions[currentquestion].choices[i]+'<br/></label><br/></div>';
+      var formHtml = '';
+      for (var i = 0; i < options.length; i++) {
+        formHtml += '<div><input type="radio" name="option" value="' + i + '" id="option' + i + '"><label for="option' + i + '">' + allQuestions[currentquestion].choices[i] + '<br/></label><br/></div>';
       }
       $('#form').html(formHtml);
-}
-$(document).ready(function() {
+    }
 
-  $("#container").hide();
-  $('#start').click(function() {
-    $("#container").fadeIn();
-    $(this).hide();
-  });
+    $(document).ready(function () {
 
-  $(function() {
-    $("#progressbar").progressbar({
-      max: allQuestions.length - 1,
-      value: 0
-    });
-  });
+      $("#container").hide();
+      $('#start').click(function () {
+        $("#container").fadeIn();
+        $(this).hide();
+        countdown();
+      });
 
-  setupOptions();
 
-  $("#next").click(function() {
-		checkAns();
-    currentquestion++;
-    $(function() {
-      $("#progressbar").progressbar({
-        value: currentquestion
+
+      setupOptions();
+
+      $("#next").click(function () {
+        checkAns();
+        currentquestion++;
+
+
+        if (currentquestion < allQuestions.length) {
+          setupOptions();
+          if (currentquestion == allQuestions.length - 1) {
+
+            $('#next').html("Submit");
+            //$('#next').off("click");
+            $('#next').click(function () {
+              $("#container").hide();
+              var marks = correctAnswers * 100 / (allQuestions.length);
+              clearInterval(myTimer);
+              if (marks >= Number(quiz.passing_percentage)) {
+                $("#result").html("<p style='color:green;'>Your Score is " + correctAnswers + " out of " + allQuestions.length + " and your percentage is " + (marks) + "%" + "You have pass the final quiz. Congrats on completing the course.</p>").hide();
+              } else {
+                $("#result").html("<p style='color:red;'>Your Score is " + correctAnswers + " out of " + allQuestions.length + " and your percentage is " + (marks) + "%" + " You have failed the final quiz, please retake the quiz.</p>").hide();
+              }
+
+              $("#result").fadeIn(1500);
+              var data = {
+                "quiz_attempt_id": `QA ${Math.floor(Math.random() * (1000 - 10 + 1) + 10)}`, "lesson_id": quiz.lesson_id, "learner_username": "JohnSmithTheMan", "course_id": quiz.course_id, "class_id": quiz.class_id, "marks_awarded": marks, "is_passed": (marks >= Number(quiz.passing_percentage))
+              }
+
+              fetch('/update_attempt', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+              })
+                .then(response => { })
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
+            });
+
+          }
+
+        };
       });
     });
-    if (currentquestion < allQuestions.length) {
-			setupOptions();
-      if (currentquestion == allQuestions.length - 1) {
-        $('#next').html("Submit");
-        //$('#next').off("click");
-        $('#next').click(function() {
-          $("#container").hide();
-          $("#result").html("Your Score is " + correctAnswers + " out of " + currentquestion + " and your percentage is " + (correctAnswers * 100 / (currentquestion)) + "%").hide();
-          $("#result").fadeIn(1500);
-        });
 
+    function submit_ans() {
+
+      $("#container").hide();
+
+      var marks = correctAnswers * 100 / (allQuestions.length);
+      clearInterval(myTimer);
+      if (marks >= Number(quiz.passing_percentage)) {
+        $("#result").html("<p style='color:green;'>Your Score is " + correctAnswers + " out of " + allQuestions.length + " and your percentage is " + (marks) + "%" + " You have pass the final quiz. Congrats on completing the course.</p>").hide();
+      } else {
+        $("#result").html("<p style='color:red;'>Your Score is " + correctAnswers + " out of " + allQuestions.length + " and your percentage is " + (marks) + "%" + " You have failed the final quiz, please retake the quiz.</p>").hide();
       }
+      $("#result").fadeIn(1500);
 
-    };
-  });
-});
-  
-    </script>
+    }
+    var myTime;
+    function countdown() {
+      var count1 = Number(quiz.time_limit) * 60;
+      myTimer = setInterval(function () {
+        document.getElementById("timer").innerHTML = `${Math.round(count1 / 60) - 1} Minutes ${count1 % 60} Seconds`;
+        count1--;
+        console.log(count1)
+        if (count1 == 0) {
+          clearInterval(myTimer);
+          submit_ans();
+        }
+      }, 1000);
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
     crossorigin="anonymous"></script>
- 
+
 </body>
+
 </html>
