@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, redirect
 from learnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
+from learnerAssignOrEnrolDomain import LearnerAssignOrEnrol
 from learnerDAO import LearnerDAO
 from courseDAO import CourseDAO
 from classDAO import ClassDAO
@@ -72,8 +73,45 @@ def view_eligible_courses(learner_username):
             eligible_courses_list.append(course_dict)
 
     return render_template(
-        "learnerViewEligibleCourses.html", courses=eligible_courses_list
+        "learnerViewEligibleCourses.html",
+        courses=eligible_courses_list,
+        learner_username=learner_username,
     )
+
+
+@app.route(
+    "/enrol_eligible_courses/<string:course_id>/<string:class_id>/<string:learner_username>"
+)
+def enrol_eligible_courses(course_id, class_id, learner_username):
+    learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
+    learnerAssignOrEnrol = LearnerAssignOrEnrol(
+        learner_username=learner_username,
+        admin_username=None,
+        class_id=class_id,
+        course_id=course_id,
+        is_enrolment_approved=False,
+        is_completed=False,
+        is_enrolment_rejected=False,
+    )
+
+    learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
+    # return render_template("learnerViewEnrolledCourses.html")
+    return redirect(
+        f"http://18.234.140.174:5007/view_pending_courses/{learner_username}"
+    )
+
+
+@app.route(
+    "/withdraw_course/<string:course_id>/<string:class_id>/<string:learner_username>"
+)
+def withdraw_course(course_id, class_id, learner_username):
+    learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
+
+    learnerAssignOrEnrolDAO.delete_one(
+        class_id=class_id, course_id=course_id, learner_username=learner_username
+    )
+    # return render_template("learnerViewEnrolledCourses.html")
+    return redirect(f"http://18.234.140.174:5007/view_enrolled_courses/{learner_username}")
 
 
 if __name__ == "__main__":

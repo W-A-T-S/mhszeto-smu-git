@@ -15,13 +15,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -33,13 +28,13 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Learner Dashboard</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a>
                     </li>
 
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Welcome, Learner!</a>
+                            data-bs-toggle="dropdown" aria-expanded="false">Welcome, Adminstrator!</a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Logout</a></li>
                         </ul>
@@ -53,59 +48,52 @@
     <header class="bg-secondary py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Learner Courses</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Enrolled Courses</p>
+                <h1 class="display-4 fw-bolder"> Adminstrator Dashboard</h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Review Request, Assign Learners, Assign Trainers </p>
             </div>
         </div>
     </header>
 
-    <br>
+    <br><br>
+
     <!-- Section-->
-    <div class="container">
-        <div class="row">
-            <h3 class="col-md-8"></h3>
-        </div>
-        <!-- enrolled_courses_dict = {"course_id": course_id, "class_id":class_id, "course_description":
-        course_description,"start_datetime":start_datetime, "end_datetime":end_datetime,"lesson_count":lesson_count } -->
+    <div class="container" id="test">
 
 
-        <hr />
-        <br>
-        {% for course in courses %}
 
-        <h4 style="font-size:19px" class="">Course ID: {{course.course_id}}</h4>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: {{course.lesson_count}}%" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-10">
+        <!-- Available Learner Table -->
+        <table class="table table-condensed" id="removeLearnerTable">
+            <thead class="table-info">
+                <tr>
+                    <th>Learner ID</th>
+                    <th>Learner Name</th>
+                    <th>Course ID</th>
+                    <th>Class ID</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                <p style="font-size:19px" class="">Description: {{course.course_description}}</p>
-                <p style="font-size:19px" class="">Class: {{course.class_id}}</p>
-                <p style="font-size:19px" class="">Period: {{course.start_datetime}} to {{course.end_datetime}}</p>
-            </div>
-            <div class="col-md-2">
-                <a class="btn btn-info"
-                    href="http://18.234.140.174:5009/view_lesson/{{course.class_id}}/{{course.course_id}}/{{course.learner_username}}">Go
-                    to class</a>
-                {% if course.lesson_count == "100.0" %}
-                <a class="btn btn-info mt-2"
-                    href="http://18.234.140.174:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
-                    to Final Quiz</a>
-                {% else %}
-                <a class="btn btn-info mt-2 disabled"
-                    href="http://18.234.140.174:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
-                    to Final Quiz</a>
-                {% endif %}
-                {% if course.is_withdrawable == True %}
-                <a class="btn btn-danger mt-2"
-                    href="http://18.234.140.174:5010/withdraw_course/{{course.course_id}}/{{course.class_id}}/{{course.learner_username}}">Withdraw</a>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
+                {% for learner in learners %}
+                <tr>
+                    <td class="nr">{{learner.learner_username}}</td>
+                    <td>{{learner.learner_name}}</td>
+                    <td>{{learner.course_id}}</td>
+                    <td>{{learner.class_id}}</td>
+                    <td> <button type="button" id="learnerid" class="btn btn-success"
+                            onclick="location.href='http://18.234.140.174:5001/approve_learner/{{learner.course_id}}/{{learner.class_id}}/{{learner.learner_username}}/LarryThePaperChaser'">Accept</button>
+                    </td>
+                    <td> <button type="button" id="learnerid" class="btn btn-danger"
+                            onclick="location.href='http://18.234.140.174:5001/reject_learner/{{learner.course_id}}/{{learner.class_id}}/{{learner.learner_username}}/LarryThePaperChaser'">Reject</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
     </div>
+
 
     <br><br>
 
@@ -116,6 +104,12 @@
         </div>
     </footer>
 
+
+    <script>
+
+
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"

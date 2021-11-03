@@ -8,6 +8,8 @@ from quizAttemptDAO import QuizAttemptDAO
 from lessonDAO import LessonDAO
 from materialDAO import MaterialDAO
 from learnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
+from datetime import date
+import datetime
 
 app = Flask(__name__, template_folder="./Templates")
 
@@ -16,7 +18,10 @@ app = Flask(__name__, template_folder="./Templates")
 def view_enrolled_courses(learner_username):
     learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
     many_learner_assign_or_enroll_object = learnerAssignOrEnrolDAO.find_query(
-        query={"_id.learner_username": learner_username, "is_enrolment_approved": True}
+        query={
+            "_id.learner_username": learner_username,
+            "is_enrolment_approved": True,
+        }
     )
     enrolled_courses_list = []
     courseDAO = CourseDAO()
@@ -28,8 +33,18 @@ def view_enrolled_courses(learner_username):
         start_datetime = one_class_obj.get_start_date_time()
         end_datetime = one_class_obj.get_end_date_time()
         course_description = courseDAO.find_one(course_id).get_description()
+        enrolment_open_date = one_class_obj.get_enrolment_open_date()
+        enrolment_close_date = one_class_obj.get_enrolment_close_date()
 
         lesson_count = get_learner_progress(class_id, course_id, learner_username)
+
+        withdrawable = False
+
+        if (
+            enrolment_open_date < datetime.datetime.now()
+            and enrolment_close_date > datetime.datetime.now()
+        ):
+            withdrawable = True
 
         enrolled_courses_dict = {
             "course_id": course_id,
@@ -39,6 +54,9 @@ def view_enrolled_courses(learner_username):
             "end_datetime": end_datetime,
             "lesson_count": lesson_count,
             "learner_username": learner_username,
+            "enrolment_open_date": enrolment_open_date,
+            "enrolment_close_date": enrolment_close_date,
+            "is_withdrawable": withdrawable,
         }
         enrolled_courses_list.append(enrolled_courses_dict)
 
@@ -76,6 +94,42 @@ def view_completed_courses(learner_username):
 
     return render_template(
         "learnerViewCompletedCourses.html", courses=completed_courses_list
+    )
+
+
+@app.route("/view_pending_courses/<string:learner_username>")
+def view_pending_courses(learner_username):
+    learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
+    many_learner_assign_or_enroll_object = learnerAssignOrEnrolDAO.find_query(
+        query={
+            "_id.learner_username": learner_username,
+            "is_completed": False,
+            "is_enrolment_approved": False,
+        }
+    )
+    completed_courses_list = []
+    courseDAO = CourseDAO()
+    classDAO = ClassDAO()
+    for one_learner_assign_or_enroll_object in many_learner_assign_or_enroll_object:
+        class_id = one_learner_assign_or_enroll_object.get_class_id()
+        course_id = one_learner_assign_or_enroll_object.get_course_id()
+        one_class_obj = classDAO.find_one(class_id, course_id)
+        start_datetime = one_class_obj.get_start_date_time()
+        end_datetime = one_class_obj.get_end_date_time()
+        course_description = courseDAO.find_one(course_id).get_description()
+        completed_courses_dict = {
+            "course_id": course_id,
+            "class_id": class_id,
+            "course_description": course_description,
+            "start_datetime": start_datetime,
+            "end_datetime": end_datetime,
+            "learner_username": learner_username,
+            "is_enrolment_rejected": one_learner_assign_or_enroll_object.get_is_enrolment_rejected(),
+        }
+        completed_courses_list.append(completed_courses_dict)
+
+    return render_template(
+        "learnerViewPendingCourses.html", courses=completed_courses_list
     )
 
 
@@ -154,4 +208,4 @@ def get_learner_progress(class_id, course_id, learner_username):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5007, debug=True)
+    app.run(port=5007, debug=True)

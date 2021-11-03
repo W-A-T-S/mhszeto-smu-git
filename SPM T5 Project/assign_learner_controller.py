@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, redirect, request
 import pymongo
-from flask_cors import CORS
+
+# from flask_cors import CORS
 from learnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
 from learnerAssignOrEnrolDomain import LearnerAssignOrEnrol
 from learnerDAO import LearnerDAO
@@ -8,17 +9,8 @@ from classDAO import ClassDAO
 from courseDAO import CourseDAO
 
 app = Flask(__name__)
-connection = pymongo.MongoClient(
-    "18.136.194.180",
-    username="spm_team",
-    password="spmbestteam",
-    authSource="admin",
-    authMechanism="SCRAM-SHA-256",
-)
 
-db = connection["spm_aio_db"]
-CORS(app)
-
+# CORS(app)
 
 
 def checklearner_for_prereq_list(list_of_prerequisites):
@@ -72,7 +64,7 @@ def getlearner(learners_met_prerequisites, course_id, class_id):
     # for bLearner in learnerdetails:
     # return jsonify(bLearner)
     return render_template(
-        "ssign.html", learners=learnersdetails, course_id=course_id, class_id=class_id
+        "assign.html", learners=learnersdetails, course_id=course_id, class_id=class_id
     )
 
 
@@ -126,6 +118,7 @@ def create_learner_assignment_class(
         course_id=course_id,
         is_enrolment_approved=True,
         is_completed=False,
+        is_enrolment_rejected=False,
     )
     learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
     learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
@@ -153,16 +146,101 @@ def update_class_course_information(
             course_id, class_id, learner_username, admin_username
         )
         msg = "Assign Learner Successful"
-        return render_template(
-            "assign.html",
-            successmsg=msg,
-        )
-        #return redirect(f'http://18.234.140.174:5000/classes/{course_id}')
-     
+
+        return redirect(f"http://18.234.140.174:5000/classes/{course_id}")
+
         # return str("Completed")
     else:
         return str("Cannot update, due to no vacancies")
 
 
+@app.route(
+    "/approve_learner/<string:course_id>/<string:class_id>/<string:learner_username>/<string:admin_username>",
+    methods=["GET", "PUT"],
+)
+def approve_learner(course_id, class_id, learner_username, admin_username):
+    learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
+    learnerAssignOrEnrolDAO.delete_one(
+        class_id=class_id, course_id=course_id, learner_username=learner_username
+    )
+
+    learnerAssignOrEnrol = LearnerAssignOrEnrol(
+        learner_username=learner_username,
+        admin_username=admin_username,
+        class_id=class_id,
+        course_id=course_id,
+        is_enrolment_approved=True,
+        is_completed=False,
+        is_enrolment_rejected=False,
+    )
+    learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
+
+    return redirect(
+        f"http://18.234.140.174:5001/get_learner_enrolment_requests/{course_id}/{class_id}"
+    )
+
+
+@app.route(
+    "/reject_learner/<string:course_id>/<string:class_id>/<string:learner_username>/<string:admin_username>",
+    methods=["GET", "PUT"],
+)
+def reject_learner(course_id, class_id, learner_username, admin_username):
+
+    learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
+    learnerAssignOrEnrolDAO.delete_one(
+        class_id=class_id, course_id=course_id, learner_username=learner_username
+    )
+
+    learnerAssignOrEnrol = LearnerAssignOrEnrol(
+        learner_username=learner_username,
+        admin_username=admin_username,
+        class_id=class_id,
+        course_id=course_id,
+        is_enrolment_approved=False,
+        is_completed=False,
+        is_enrolment_rejected=True,
+    )
+    learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
+
+    return redirect(
+        f"http://18.234.140.174:5001/get_learner_enrolment_requests/{course_id}/{class_id}"
+    )
+
+
+@app.route(
+    "/get_learner_enrolment_requests/<string:course_id>/<string:class_id>",
+    methods=["GET", "PUT"],
+)
+def get_learner_enrolment_requests(course_id, class_id):
+    learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
+
+    many_learnersAssignOrEnrol_object = learnerAssignOrEnrolDAO.find_query(
+        query={
+            "_id.course_id": course_id,
+            "_id.class_id": class_id,
+            "is_enrolment_approved": False,
+            "is_enrolment_rejected": False,
+        }
+    )
+    learner_list = []
+    for one_learnersAssignOrEnrol_object in many_learnersAssignOrEnrol_object:
+        learner_username = one_learnersAssignOrEnrol_object.get_learner_username()
+
+        learnerDAO = LearnerDAO()
+        learner_obj = learnerDAO.find_one(learner_username=learner_username)
+        learner_name = learner_obj.get_name()
+
+        learner_list.append(
+            {
+                "learner_name": learner_name,
+                "learner_username": learner_username,
+                "class_id": class_id,
+                "course_id": course_id,
+            }
+        )
+
+    return render_template("selfenrolmentrequests.html", learners=learner_list)
+
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
