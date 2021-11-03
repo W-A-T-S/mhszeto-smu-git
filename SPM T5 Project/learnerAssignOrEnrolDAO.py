@@ -25,6 +25,7 @@ class LearnerAssignOrEnrolDAO:
                 course_id=one_assignment["_id"]["course_id"],
                 is_enrolment_approved=one_assignment["is_enrolment_approved"],
                 is_completed=one_assignment["is_completed"],
+                is_enrolment_rejected=one_assignment["is_enrolment_rejected"],
             )
             many_assignments_list.append(one_assignment_object)
         return many_assignments_list
@@ -40,8 +41,9 @@ class LearnerAssignOrEnrolDAO:
                         "class_id": one_assignment_obj.get_class_id(),
                         "course_id": one_assignment_obj.get_course_id(),
                     },
-                    "is_enrolment_approved": True,
-                    "is_completed": False,
+                    "is_enrolment_approved": one_assignment_obj.get_is_enrolment_approved(),
+                    "is_completed": one_assignment_obj.get_is_completed(),
+                    "is_enrolment_rejected": one_assignment_obj.get_is_enrolment_rejected(),
                 }
             )
         )
