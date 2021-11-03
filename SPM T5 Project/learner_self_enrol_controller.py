@@ -111,8 +111,10 @@ def withdraw_course(course_id, class_id, learner_username):
         class_id=class_id, course_id=course_id, learner_username=learner_username
     )
     # return render_template("learnerViewEnrolledCourses.html")
-    return redirect(f"http://18.234.140.174:5007/view_enrolled_courses/{learner_username}")
+    return redirect(
+        f"http://18.234.140.174:5007/view_enrolled_courses/{learner_username}"
+    )
 
 
 if __name__ == "__main__":
-    app.run(port=5010, debug=True)
+    app.run(host="0.0.0.0", port=5010, debug=True)
