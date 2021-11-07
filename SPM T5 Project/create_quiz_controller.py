@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/create_quizzes")
 def display_quiz():
-    return render_template("createquiz.html")
+    return render_template("trainer_create_quiz.html")
 
 
 # create new quiz

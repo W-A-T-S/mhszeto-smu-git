@@ -11,7 +11,7 @@ app = Flask(__name__)
 def display_page(course_id, class_id):
     return (
         render_template(
-            "assign_trainer.html", data={"class_id": class_id, "course_id": course_id}
+            "admin_assign_trainer.html", data={"class_id": class_id, "course_id": course_id}
         ),
         200,
     )

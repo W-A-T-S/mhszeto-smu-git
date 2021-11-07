@@ -30,7 +30,7 @@ def courses():
         courses_dict.append(result)
 
     return render_template(
-        "adminViewCourses.html", introText=courseText, courses=courses_dict
+        "admin_view_courses.html", introText=courseText, courses=courses_dict
     )
 
 
@@ -103,7 +103,7 @@ def classes(courseid):
         )  # Appending the each-class sublist into the main all-classes list
 
     return render_template(
-        "adminViewClasses.html",
+        "admin_view_classes.html",
         introText=classText,
         currentCourse=currentCourseId,
         classDetails=allClassList,

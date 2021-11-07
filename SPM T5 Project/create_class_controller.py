@@ -14,7 +14,7 @@ app = Flask(__name__,template_folder="./Templates")
 @app.route("/create_class/<string:course_id>", methods=["GET"])
 def all_class(course_id):
     return render_template(
-        "create_class.html", course_id=course_id
+        "admin_create_class.html", course_id=course_id
     )
 
 # create new class

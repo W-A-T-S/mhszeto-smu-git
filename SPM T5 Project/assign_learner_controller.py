@@ -64,7 +64,7 @@ def getlearner(learners_met_prerequisites, course_id, class_id):
     # for bLearner in learnerdetails:
     # return jsonify(bLearner)
     return render_template(
-        "assign.html", learners=learnersdetails, course_id=course_id, class_id=class_id
+        "admin_assign_learner.html", learners=learnersdetails, course_id=course_id, class_id=class_id
     )
 
 
@@ -239,7 +239,7 @@ def get_learner_enrolment_requests(course_id, class_id):
             }
         )
 
-    return render_template("selfenrolmentrequests.html", learners=learner_list)
+    return render_template("admin_selfenrolment_requests.html", learners=learner_list)
 
 
 if __name__ == "__main__":

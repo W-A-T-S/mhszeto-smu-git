@@ -90,7 +90,7 @@ def view_final_quiz(class_id, course_id):
             }
         )
 
-    return render_template("takequiz.html", quiz=json.dumps(quiz_dict))
+    return render_template("learner_take_quiz.html", quiz=json.dumps(quiz_dict))
 
 
 @app.route("/update_attempt", methods=["POST"])
