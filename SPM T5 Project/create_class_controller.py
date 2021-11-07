@@ -14,7 +14,7 @@ app = Flask(__name__,template_folder="./Templates")
 @app.route("/create_class/<string:course_id>", methods=["GET"])
 def all_class(course_id):
     return render_template(
-        "create_class.html", course_id=course_id
+        "admin_create_class.html", course_id=course_id
     )
 
 # create new class
@@ -25,15 +25,14 @@ def create_class():
         classDAO = ClassDAO()
         print(dateutil.parser.isoparse(request.form["enrolment_open_date"]))
         print(type(request.form["enrolment_open_date"]))
-        # print("------------------------------------------------")
-        # print(request.form)
+ 
         
         one_class_object = Class(
             course_id=request.form["course_id"].upper(),
             class_id=request.form["class_id"].upper(),
             trainer_name=None,
             trainer_username=None,
-            # KIV admin username can be hardcoded
+
             admin_username=request.form["admin_username"],
             enrolment_open_date=dateutil.parser.isoparse(
                 request.form["enrolment_open_date"]

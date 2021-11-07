@@ -10,15 +10,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
-    <!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
 </head>
 
 <body>
@@ -30,7 +26,7 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
                     </li>
 
 
@@ -57,85 +53,51 @@
     </header>
 
     <br><br>
-    <!-- Section-->
 
+    <div class="container" id="test">
 
-    <!-- <h2>Create  <b>Class </b>  <button type="button"  class="btn btn-success float-right"
-                            data-toggle="modal" data-bs-target="#mymodal">Add New Class</button> </h2> -->
+        <table class="table table-condensed" id="removeLearnerTable">
+            <thead class="table-info">
+                <tr>
+                    <th>Learner ID</th>
+                    <th>Learner Name</th>
+                    <th>Course ID</th>
+                    <th>Class ID</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+            </thead>
+            <tbody>
 
+                {% for learner in learners %}
+                <tr>
+                    <td class="nr">{{learner.learner_username}}</td>
+                    <td>{{learner.learner_name}}</td>
+                    <td>{{learner.course_id}}</td>
+                    <td>{{learner.class_id}}</td>
+                    <td> <button type="button" id="learnerid" class="btn btn-success"
+                            onclick="location.href='http://18.234.140.174:5001/approve_learner/{{learner.course_id}}/{{learner.class_id}}/{{learner.learner_username}}/LarryThePaperChaser'">Accept</button>
+                    </td>
+                    <td> <button type="button" id="learnerid" class="btn btn-danger"
+                            onclick="location.href='http://18.234.140.174:5001/reject_learner/{{learner.course_id}}/{{learner.class_id}}/{{learner.learner_username}}/LarryThePaperChaser'">Reject</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <div class="container">
-        <form action="{{url_for('create_class')}}" method="POST">
-
-            <div class="form-group">
-                <label>Course ID:</label>
-                <input type="text" class="form-control" name="course_id" required="1" value="{{course_id}}">
-            </div>
-      
-            <div class="form-group">
-                <label>Class ID</label>
-                <input type="text" class="form-control" name="class_id" required="1">
-            </div>
-      
-
-            <div class="form-group">
-                <label>Admin Username</label>
-                <input type="text" class="form-control" name="admin_username" required="1">
-            </div>
-    
-
-            <div class="form-group">
-                <label>Enrolment Open date</label>
-                <input type="datetime-local" class="form-control" name="enrolment_open_date" required="1">
-            </div>
-
-            <div class="form-group">
-                <label>Enrolment Close date</label>
-                <input type="datetime-local" class="form-control" name="enrolment_close_date" required="1">
-            </div>
-
-
-            <div class="form-group">
-                <label>Start date time</label>
-                <input type="datetime-local" class="form-control" name="start_date_time" required="1">
-            </div>
-            <div class="form-group">
-                <label>End Date time</label>
-                <input type="datetime-local" class="form-control" name="end_date_time" required="1">
-            </div>
-
-
-            <div class="form-group">
-                <label>Class size</label>
-                <input type="int" class="form-control" name="class_size" required="1">
-            </div>
-            <div class="form-group">
-                <label>Class available slots</label>
-                <input type="int" class="form-control" name="class_available_slots" required="1">
-            </div>
-
-            <div class="form-group">
-                <button class="btn btn-primary" type="submit">Add Class</button>
-            </div>
-        </form>
     </div>
 
 
     <br><br>
-    <!-- Footer-->
+
+
     <footer class="py-5">
         <div class="container">
             <p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p>
         </div>
     </footer>
 
-
-    <script>
-
-
-
-
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"

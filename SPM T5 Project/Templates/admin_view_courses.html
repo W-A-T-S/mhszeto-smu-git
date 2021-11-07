@@ -14,8 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
@@ -24,11 +23,12 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
+                    </li>
             
                 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome, Learner!</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome, Adminstrator!</a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Logout</a></li>
                         </ul>
@@ -42,62 +42,42 @@
       <header class="bg-secondary py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder"> Learner Dashboard</h1>
-                <p class="lead fw-normal text-white-50 mb-0"> E-Learning Platform</p>
+                <h1 class="display-4 fw-bolder"> Administrator Dashboard</h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Review Request, Assign Learners, Assign Trainers </p>
             </div>
         </div>
     </header>
 
-    <br><br>
+    <br>
     <!-- Section-->
     <div class="container">
-       
-      
+        <h3>{{introText}}</h3>
+        <br>
 
-      
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="list-group">
-            <a href="#" class="list-group-item ">Lesson 1</a>
-            <a href="#" class="list-group-item disabled">Lesson 2</a>
-            <a href="#" class="list-group-item disabled"> Lesson 3</a>
-          </div>
 
-          <br><br>
-          <h5>Course Completion Status</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-              70%
-            </div>
-          </div>
-        
+        <!-- For Courses -->
+        {% for courseInfo in courses %}
+        <div class="row">
+            <h4 class="col-md-9">{{courseInfo.course_id}}: {{courseInfo.title}}</h4>
+            <button class="btn btn-info col-md-3" onclick="location.href='http://18.234.140.174:5000/classes/{{courseInfo.course_id}}'">View Classes</button>
+            {% if courseInfo.is_retired == true %}
+            <a>Status: Retired</a>
+            {% else %}
+            <a>Status: Active</a>
+            {% endif %}
         </div>
-        <div class="col-sm-8">
-
-          <div class="card">
-            <div class="card-header"><h3>Lesson Title</h3></div>
-            <div class="card-body">Content</div>
-          </div>
-
-        </div>
-      </div>
-
-     
-     
-
-
- 
-
+        <hr/>
+        <br>
+        {% endfor %}
     </div>
 
-
     <br><br>
+
     <!-- Footer-->
     <footer class="py-5">
         <div class="container"><p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p></div>
     </footer>
     
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 

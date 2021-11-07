@@ -55,8 +55,7 @@ class QuestionDAO:
         return many_question_objects
 
     def find_one(self, class_id, course_id, lesson_id):
-        # mongodb function - find_one
-        # one_quiz is dictionary retrieved from monogodb
+     
         one_question = self._collection.find_one(
             dict(
                 {

@@ -60,9 +60,9 @@ def view_enrolled_courses(learner_username):
         }
         enrolled_courses_list.append(enrolled_courses_dict)
 
-    # return render_template("view_enrolled_course.html", enrolled_courses_list)
+   
     return render_template(
-        "learnerViewEnrolledCourses.html", courses=enrolled_courses_list
+        "learner_view_enrolledcourses.html", courses=enrolled_courses_list
     )
 
 
@@ -93,7 +93,7 @@ def view_completed_courses(learner_username):
         completed_courses_list.append(completed_courses_dict)
 
     return render_template(
-        "learnerViewCompletedCourses.html", courses=completed_courses_list
+        "learner_view_completedcourses.html", courses=completed_courses_list
     )
 
 
@@ -129,7 +129,7 @@ def view_pending_courses(learner_username):
         completed_courses_list.append(completed_courses_dict)
 
     return render_template(
-        "learnerViewPendingCourses.html", courses=completed_courses_list
+        "learner_view_pendingcourses.html", courses=completed_courses_list
     )
 
 

@@ -15,10 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+   
 </head>
 
 <body>
@@ -30,7 +28,7 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Admin Dashboard</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
                     </li>
 
 
@@ -59,11 +57,6 @@
     <br><br>
     <!-- Section-->
 
-
-    <!-- <h2>Create  <b>Class </b>  <button type="button"  class="btn btn-success float-right"
-                            data-toggle="modal" data-bs-target="#mymodal">Add New Class</button> </h2> -->
-
-
     <div class="container">
         <form action="{{url_for('create_class')}}" method="POST">
 
@@ -76,13 +69,12 @@
                 <label>Class ID</label>
                 <input type="text" class="form-control" name="class_id" required="1">
             </div>
-      
+    
 
             <div class="form-group">
                 <label>Admin Username</label>
                 <input type="text" class="form-control" name="admin_username" required="1">
             </div>
-    
 
             <div class="form-group">
                 <label>Enrolment Open date</label>
@@ -119,6 +111,9 @@
             </div>
         </form>
     </div>
+
+
+
 
 
     <br><br>

@@ -32,8 +32,7 @@ class QuizDAO:
         
 
     def find_one(self, class_id,course_id,lesson_id ):
-        #mongodb function - find_one
-        #one_quiz is dictionary retrieved from monogodb 
+  
         one_quiz = self._collection.find_one(dict({"_id.class_id": class_id, 
                                         "_id.course_id": course_id, 
                                         "_id.lesson_id": lesson_id }))

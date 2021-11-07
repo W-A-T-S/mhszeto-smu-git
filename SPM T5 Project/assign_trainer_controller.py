@@ -11,7 +11,7 @@ app = Flask(__name__)
 def display_page(course_id, class_id):
     return (
         render_template(
-            "assign_trainer.html", data={"class_id": class_id, "course_id": course_id}
+            "admin_assign_trainer.html", data={"class_id": class_id, "course_id": course_id}
         ),
         200,
     )
@@ -81,12 +81,7 @@ def get_class_course_information(course_id, class_id):
         ),
         200,
     )
-    # except:
-    #     return (
-    #         jsonify({"code": 400, "msg": "Failed finding class and course!"}),
-    #         400,
-    #     )
-
+   
 
 @app.route("/assign_trainer/json/<string:course_id>/<string:class_id>", methods=["PUT"])
 def update_class_course_information(course_id, class_id):

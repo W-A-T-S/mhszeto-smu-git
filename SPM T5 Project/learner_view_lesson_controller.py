@@ -75,7 +75,7 @@ def view_lessons(class_id, course_id, learner_username):
             one_lesson_dict["materials"].append({"material_id": material_id, "title": material_title, "description": material_description, "type":material_type , "url": material_url,"is_completed": is_completed})
         
         lesson_list.append(one_lesson_dict)
-    return render_template("view_lesson.html", lessons=lesson_list)
+    return render_template("learner_view_lesson.html", lessons=lesson_list)
 
 
 @app.route("/update_material_completed/<string:material_id>/<string:class_id>/<string:course_id>/<string:lesson_id>/<string:learner_username>")

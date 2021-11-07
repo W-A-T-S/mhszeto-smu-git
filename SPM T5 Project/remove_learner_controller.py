@@ -8,10 +8,6 @@ from classDAO import ClassDAO
 app = Flask(__name__)
 
 
-# def getalllearners(course_id, class_id):
-#     alllearner = learner_collection.find({})
-#     return render_template("admin.html", learners=alllearner)
-
 
 @app.route(
     "/displayclasslearner/<string:course_id>/<string:class_id>",
@@ -42,7 +38,7 @@ def display_class_course_information(course_id, class_id):
 )
 # Remove learner into registered class
 def withdraw_learner(course_id, class_id, learner_username):
-    # try
+
     learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
     learnerAssignOrEnrolDAO.delete_one(
         class_id=class_id, course_id=course_id, learner_username=learner_username
@@ -53,9 +49,7 @@ def withdraw_learner(course_id, class_id, learner_username):
         queryIdentifier={"_id": {"course_id": course_id, "class_id": class_id}},
         queryValues={"$inc": {"class_available_slots": 1}},
     )
-    # except
-
-    # return redirect(f"http://18.234.140.174:5004/displayclasslearner/{course_id}/{class_id}")
+ 
     return redirect(f'http://18.234.140.174:5000/classes/{course_id}')
 
 
