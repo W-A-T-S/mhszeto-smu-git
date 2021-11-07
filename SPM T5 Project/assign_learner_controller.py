@@ -32,7 +32,7 @@ def checklearner_for_prereq_list(list_of_prerequisites):
                 )
 
         count += 1
-    # print(learners["learners_who_completed_prereq_list"])
+
     return learners_who_completed_prereq_list
 
 
@@ -83,7 +83,6 @@ def getalllearners(course_id, class_id):
 
 
 @app.route("/assignlearners/<string:course_id>/<string:class_id>")
-# step 3: get all the learner details for display
 def check_if_course_needs_prereq(course_id, class_id):
 
     courseDAO = CourseDAO()
@@ -93,7 +92,7 @@ def check_if_course_needs_prereq(course_id, class_id):
             course_obj.get_course_prerequisites()
         )
         return getlearner(learners_met_prerequisites, course_id, class_id)
-        # return render_template("assign.html", learners=filteredlearners)
+       
     else:
         return getalllearners(course_id, class_id)
 
@@ -122,8 +121,7 @@ def create_learner_assignment_class(
     )
     learnerAssignOrEnrolDAO = LearnerAssignOrEnrolDAO()
     learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
-    # complete_collection.update_one(classenroll,{'$set':classenroll},upsert=True)
-
+   
 
 @app.route(
     "/updatelearner/<string:course_id>/<string:class_id>/<string:learner_username>/<string:admin_username>",
@@ -149,7 +147,7 @@ def update_class_course_information(
 
         return redirect(f"http://18.234.140.174:5000/classes/{course_id}")
 
-        # return str("Completed")
+     
     else:
         return str("Cannot update, due to no vacancies")
 
