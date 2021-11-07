@@ -60,9 +60,9 @@ def view_enrolled_courses(learner_username):
         }
         enrolled_courses_list.append(enrolled_courses_dict)
 
-    # return render_template("view_enrolled_course.html", enrolled_courses_list)
+   
     return render_template(
-        "learne_view_enrolledcourses.html", courses=enrolled_courses_list
+        "learner_view_enrolledcourses.html", courses=enrolled_courses_list
     )
 
 

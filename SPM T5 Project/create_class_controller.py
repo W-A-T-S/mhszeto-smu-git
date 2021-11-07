@@ -25,15 +25,14 @@ def create_class():
         classDAO = ClassDAO()
         print(dateutil.parser.isoparse(request.form["enrolment_open_date"]))
         print(type(request.form["enrolment_open_date"]))
-        # print("------------------------------------------------")
-        # print(request.form)
+ 
         
         one_class_object = Class(
             course_id=request.form["course_id"].upper(),
             class_id=request.form["class_id"].upper(),
             trainer_name=None,
             trainer_username=None,
-            # KIV admin username can be hardcoded
+
             admin_username=request.form["admin_username"],
             enrolment_open_date=dateutil.parser.isoparse(
                 request.form["enrolment_open_date"]
@@ -48,7 +47,7 @@ def create_class():
         )
 
         classDAO.insert_one(one_class_object)
-        return redirect(f'http://18.234.140.174:5000/classes/{request.form["course_id"]}')
+        return redirect(f'http://127.0.0.1:5000/classes/{request.form["course_id"]}')
     except:
         return (
             jsonify({"code": 400, "msg": "Failed Creating class and course!"}),

@@ -27,7 +27,7 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/courses">Course Management</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -58,7 +58,7 @@
         <div class="row">
             <h3 class="col-md-8">{{introText}}</h3>
             <button class="btn btn-info col-md-4"
-                onclick="location.href='http://18.234.140.174:5003/create_class/{{currentCourse}}'">Create
+                onclick="location.href='http://127.0.0.1:5003/create_class/{{currentCourse}}'">Create
                 Class for {{currentCourse}}</button>
         </div>
         <br><br><br>
@@ -68,13 +68,13 @@
         {% for classInfo in classDetails %}
         <div class="row">
             <h4 class="col-md-8">{{classInfo[1]}}</h4>
-            <button class="btn btn-info col-md-4" onclick="">View Self-Enrollment Requests for {{classInfo[1]}}</button>
+            <button class="btn btn-info col-md-4" onclick="location.href='http://127.0.0.1:5001/get_learner_enrolment_requests/{{classInfo[0]}}/{{classInfo[1]}}'">View Self-Enrollment Requests for {{classInfo[1]}}</button>
         </div>
         <hr />
         <div class="row">
             <p style="font-size:19px" class="col-md-10"><span class="fw-bold">Trainer:</span> {{classInfo[2]}}</p>
             <button class="btn btn-info col-md-2"
-                onclick="location.href='http://18.234.140.174:5002/assign_trainer/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
+                onclick="location.href='http://127.0.0.1:5002/assign_trainer/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
                 Trainer</button>
         </div>
         <br>
@@ -92,10 +92,10 @@
                 </ul>
             </div>
             <button class="btn btn-info col-md-2"
-                onclick="location.href='http://18.234.140.174:5001/assignlearners/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
+                onclick="location.href='http://127.0.0.1:5001/assignlearners/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
                 Learners</button>
             <button class="btn btn-danger col-md-2"
-                onclick="location.href='http://18.234.140.174:5004/displayclasslearner/{{classInfo[0]}}/{{classInfo[1]}}'">Withdraw
+                onclick="location.href='http://127.0.0.1:5004/displayclasslearner/{{classInfo[0]}}/{{classInfo[1]}}'">Withdraw
                 Learners</button>
         </div>
         <br><br><br><br>

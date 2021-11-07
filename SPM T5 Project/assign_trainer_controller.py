@@ -81,12 +81,7 @@ def get_class_course_information(course_id, class_id):
         ),
         200,
     )
-    # except:
-    #     return (
-    #         jsonify({"code": 400, "msg": "Failed finding class and course!"}),
-    #         400,
-    #     )
-
+   
 
 @app.route("/assign_trainer/json/<string:course_id>/<string:class_id>", methods=["PUT"])
 def update_class_course_information(course_id, class_id):

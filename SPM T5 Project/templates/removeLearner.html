@@ -60,7 +60,7 @@
     <div class="container" id="test">
 
         <h4>{{successmsg}}</h4>
-        <p><a href="http://18.234.140.174:5000/classes/{{course_id}}">Back</a></p>
+        <p><a href="http://127.0.0.1:5000/classes/{{course_id}}">Back</a></p>
         <!-- Available Learner Table -->
         <table class="table table-condensed" id="removeLearnerTable">
             <thead class="table-info">
@@ -76,7 +76,7 @@
                 <tr>
                     <td class="nr">{{learner.username}}</td>
                     <td>{{learner.name}}</td>
-                    <td> <button type="button" id="learnerid" class="btn btn-info"  onclick="location.href='http://18.234.140.174:5004/withdraw_learners/{{course_id}}/{{class_id}}/{{learner.username}}'">Select </button></td>
+                    <td> <button type="button" id="learnerid" class="btn btn-info"  onclick="location.href='http://127.0.0.1:5004/withdraw_learners/{{course_id}}/{{class_id}}/{{learner.username}}'">Select </button></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -93,13 +93,6 @@
             <p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p>
         </div>
     </footer>
-
-
-    <script>
-      
-
-
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"

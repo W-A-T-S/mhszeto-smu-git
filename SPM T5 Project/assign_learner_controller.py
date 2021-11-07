@@ -145,7 +145,7 @@ def update_class_course_information(
         )
         msg = "Assign Learner Successful"
 
-        return redirect(f"http://18.234.140.174:5000/classes/{course_id}")
+        return redirect(f"http://127.0.0.1:5000/classes/{course_id}")
 
      
     else:
@@ -174,7 +174,7 @@ def approve_learner(course_id, class_id, learner_username, admin_username):
     learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
 
     return redirect(
-        f"http://18.234.140.174:5001/get_learner_enrolment_requests/{course_id}/{class_id}"
+        f"http://127.0.0.1:5001/get_learner_enrolment_requests/{course_id}/{class_id}"
     )
 
 
@@ -201,7 +201,7 @@ def reject_learner(course_id, class_id, learner_username, admin_username):
     learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
 
     return redirect(
-        f"http://18.234.140.174:5001/get_learner_enrolment_requests/{course_id}/{class_id}"
+        f"http://127.0.0.1:5001/get_learner_enrolment_requests/{course_id}/{class_id}"
     )
 
 

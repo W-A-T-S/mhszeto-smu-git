@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script src="{{url_for('static', filename='view_lesson.js')}}"></script>
+
 
 </head>
 
@@ -98,7 +98,7 @@
         </div>
         <p>Lesson Quiz</td>
             <td><a class="btn btn-info"
-                    href="http://18.234.140.174:5008/view_quiz/{{lesson.class_id}}/{{lesson.course_id}}/{{lesson.lesson_id}}">Go
+                    href="http://127.0.0.1:5008/view_quiz/{{lesson.class_id}}/{{lesson.course_id}}/{{lesson.lesson_id}}">Go
                     to
                     Quiz</a></td>
             {% endfor %}
@@ -114,29 +114,9 @@
             <p class="m-0 text-center text-black"> &copy; Developed By SPM G9 Team 5</p>
         </div>
     </footer>
-    <script>
-        function update_material(checkbox) {
-            const material_id = checkbox.value.split(",")[0]
-            const lesson_id = checkbox.value.split(",")[1]
-            const course_id = checkbox.value.split(",")[2]
-            const learner_username = checkbox.value.split(",")[3]
-            const class_id = checkbox.value.split(",")[4]
-            if (checkbox.checked == true) {
-                fetch(`/update_material_completed/${material_id}/${class_id}/${course_id}/${lesson_id}/${learner_username}`)
-                    .then((raw) => { window.location.reload(false); })
 
-                return
-            } else if (checkbox.checked == false) {
-                fetch(`/update_material_incomplete/${material_id}/${class_id}/${course_id}/${lesson_id}/${learner_username}`)
-                    .then((raw) => { window.location.reload(false); })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
-
-                return
-            }
-        }
-    </script>
+    <script src="{{url_for('static', filename='view_lesson.js')}}"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>

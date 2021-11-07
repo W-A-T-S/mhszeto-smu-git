@@ -15,8 +15,7 @@ def display_quiz():
 # create new quiz
 @app.route("/create_quiz", methods=["POST"])
 def create_quiz():
-    # try:
-    # Quiz
+
     quizDAO = QuizDAO()
     passing_percentage = int(request.json["passing_percentage"])
     lesson_id = request.json["lesson_id"]
@@ -54,11 +53,7 @@ def create_quiz():
 
     return "Successful!"
 
-    # except:
-    #     return (
-    #         jsonify({"code": 400, "msg": "Failed Creating class and course!"}),
-    #         400,
-    #     )
+
 
 
 if __name__ == "__main__":

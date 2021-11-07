@@ -101,7 +101,7 @@ def enrol_eligible_courses(course_id, class_id, learner_username):
     learnerAssignOrEnrolDAO.insert_one(learnerAssignOrEnrol)
 
     return redirect(
-        f"http://18.234.140.174:5007/view_pending_courses/{learner_username}"
+        f"http://127.0.0.1:5007/view_pending_courses/{learner_username}"
     )
 
 
@@ -116,7 +116,7 @@ def withdraw_course(course_id, class_id, learner_username):
     )
     
     return redirect(
-        f"http://18.234.140.174:5007/view_enrolled_courses/{learner_username}"
+        f"http://127.0.0.1:5007/view_enrolled_courses/{learner_username}"
     )
 
 

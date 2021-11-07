@@ -102,7 +102,7 @@ function assign_trainer() {
 		.value.split(' - ')[1];
 
 	fetch(`/assign_trainer/json/${course_id}/${class_id}`, {
-	// fetch(`http://18.234.140.174:5001/assign_trainer/json/123/123`, {
+	// fetch(`http://127.0.0.1:5001/assign_trainer/json/123/123`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',

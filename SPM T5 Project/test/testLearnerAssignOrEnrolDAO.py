@@ -1,13 +1,14 @@
 import unittest
 from unittest.mock import MagicMock, patch
+import os
 import sys
 import pymongo
 from datetime import datetime
 
-sys.path.append("../../../SPM T5 Project/user")
+sys.path.append("C:/Users\Yong\ Wei/Documents/GitHub/mhszeto-smu-git/SPM\ T5\ Project")
 from LearnerAssignOrEnrolDAO import LearnerAssignOrEnrolDAO
 
-sys.path.append("../../../SPM T5 Project/user")
+sys.path.append("C:/Users\Yong\ Wei/Documents/GitHub/mhszeto-smu-git/SPM\ T5\ Project")
 from LearnerAssignOrEnrolDomain import LearnerAssignOrEnrol
 
 

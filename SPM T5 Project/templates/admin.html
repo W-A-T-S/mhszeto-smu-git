@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
         <div class="container">
-            <a class="navbar-brand" href="http://18.234.140.174:5000/courses">AIO</a>
+            <a class="navbar-brand" href="http://127.0.0.1:5000/courses">AIO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -94,7 +94,7 @@
         <div class="row">
             <p style="font-size:19px" class="col-md-10"><span class="fw-bold">Trainer:</span> {{classInfo[2]}}</p>
             <button class="btn btn-info col-md-2" value="{{classInfo[1]}}"
-                onclick="location.href='http://18.234.140.174:5000/assigntrainer/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
+                onclick="location.href='http://127.0.0.1:5000/assigntrainer/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
                 Trainer</button>
         </div>
         <br>
@@ -112,7 +112,7 @@
                 </ul>
             </div>
             <button class="btn btn-info col-md-2" id="{{classInfo[1]}}"
-                onclick="location.href='http://18.234.140.174:5001/assignlearners/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
+                onclick="location.href='http://127.0.0.1:5001/assignlearners/{{classInfo[0]}}/{{classInfo[1]}}'">Assign
                 Learners</button>
             <button class="btn btn-danger col-md-2" onclick="">Withdraw Learners</button>
         </div>
@@ -310,7 +310,7 @@
         function choosecourse(course_id) {
             courseiden = course_id;
             sessionStorage.coursesession = courseiden;
-            window.location.replace("http://18.234.140.174:5000/classes/" + sessionStorage.coursesession);
+            window.location.replace("http://127.0.0.1:5000/classes/" + sessionStorage.coursesession);
             $("#adminviewcourse").hide();
             $("#assigntrainerform").hide();
             $("#adminviewclass").show();
@@ -321,7 +321,7 @@
         function chooseclass(class_id) {
             classiden = class_id;
             sessionStorage.coursesession = classiden;
-            window.location.replace("http://18.234.140.174:5001/classes/" + sessionStorage.coursesession);
+            window.location.replace("http://127.0.0.1:5001/classes/" + sessionStorage.coursesession);
             $("#adminviewcourse").hide();
             $("#assigntrainerform").hide();
             $("#adminviewclass").show();
@@ -331,7 +331,7 @@
         function assignlearnerbtn(claas_id) {
             classiden = class_id;
             sessionStorage.classsession = classiden;
-            window.location.replace("http://18.234.140.174:5000/learners/" + sessionStorage.coursesession);
+            window.location.replace("http://127.0.0.1:5000/learners/" + sessionStorage.coursesession);
             $("#adminviewcourse").hide();
             $("#adminviewclass").hide();
             $("#miniadminnav").hide();
@@ -358,7 +358,7 @@
 
         $("#assigntrainerbtn").click(function () {
 
-            //window.location.replace("18.234.140.174:5000/learners/"+sessionStorage.getItem("courseidensession"));
+            //window.location.replace("127.0.0.1:5000/learners/"+sessionStorage.getItem("courseidensession"));
             $("#adminviewcourse").hide();
             $("#adminviewclass").hide();
             $("#miniadminnav").hide();
@@ -368,7 +368,7 @@
         $("#assignlearnerbtn").click(function () {
             classiden = $(this).val();
             sessionStorage.classidensession = classiden;
-            window.location.replace("18.234.140.174:5000/learners/" + sessionStorage.coursesession);
+            window.location.replace("127.0.0.1:5000/learners/" + sessionStorage.coursesession);
             $("#adminviewcourse").hide();
             $("#adminviewclass").hide();
             $("#miniadminnav").hide();
@@ -388,7 +388,7 @@
             var second_part = pathStrSplit[1];
 
 
-            if (url == "http://18.234.140.174:5000/courses") {
+            if (url == "http://127.0.0.1:5000/courses") {
                 $("#miniadminnav").hide();
                 $("#learnerassigntable").hide();
                 $("#assigntrainerform").hide();
@@ -411,7 +411,7 @@
 
         //back to admin view course 
         $("#gobackadmincourse").click(function () {
-            window.location.replace("http://18.234.140.174:5000/courses");
+            window.location.replace("http://127.0.0.1:5000/courses");
             $("#adminviewcourse").show();
             $("#adminviewclass").hide();
             $("#miniadminnav").hide();
@@ -422,7 +422,7 @@
 
 
         $("#gobackclass").click(function () {
-            window.location.replace("http://18.234.140.174:5000/classes/" + sessionStorage.coursesession);
+            window.location.replace("http://127.0.0.1:5000/classes/" + sessionStorage.coursesession);
             $("#adminviewcourse").hide();
             $("#adminviewclass").show();
             $("#miniadminnav").show();
@@ -433,7 +433,7 @@
 
         $("#selecttrainerbtn").click(function () {
 
-            window.location.replace("http://18.234.140.174:5000/assign_trainer/json/" + sessionStorage.coursesession + "/" + sessionStorage.classidensession);
+            window.location.replace("http://127.0.0.1:5000/assign_trainer/json/" + sessionStorage.coursesession + "/" + sessionStorage.classidensession);
 
         })
         */
