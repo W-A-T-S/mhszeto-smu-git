@@ -1,3 +1,5 @@
+#testCourseDAO - Done By: Chow Li Wei John
+
 import unittest
 from unittest.mock import MagicMock
 import sys
@@ -5,7 +7,6 @@ import sys
 sys.path.append("../../../SPM T5 Project/")
 from courseDAO import CourseDAO
 
-#testCourseDAO class - Chow Li Wei John
 class testCourseDAO(unittest.TestCase):
     def setUp(self):
         self.__courseDAO = CourseDAO()
