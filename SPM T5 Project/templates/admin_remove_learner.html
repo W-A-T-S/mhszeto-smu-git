@@ -26,7 +26,7 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/courses">Course Management</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -56,7 +56,7 @@
     <div class="container" id="test">
 
         <h4>{{successmsg}}</h4>
-        <p><a href="http://127.0.0.1:5000/classes/{{course_id}}">Back</a></p>
+        <p><a href="http://18.234.140.174:5000/classes/{{course_id}}">Back</a></p>
      
         <table class="table table-condensed" id="removeLearnerTable">
             <thead class="table-info">
@@ -72,7 +72,7 @@
                 <tr>
                     <td class="nr">{{learner.username}}</td>
                     <td>{{learner.name}}</td>
-                    <td> <button type="button" id="learnerid" class="btn btn-info"  onclick="location.href='http://127.0.0.1:5004/withdraw_learners/{{course_id}}/{{class_id}}/{{learner.username}}'">Select </button></td>
+                    <td> <button type="button" id="learnerid" class="btn btn-info"  onclick="location.href='http://18.234.140.174:5004/withdraw_learners/{{course_id}}/{{class_id}}/{{learner.username}}'">Select </button></td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -87,20 +87,20 @@
             </div>
             <div class="col-md-2">
                 <a class="btn btn-info"
-                    href="http://127.0.0.1:5009/view_lesson/{{course.class_id}}/{{course.course_id}}/{{course.learner_username}}">Go
+                    href="http://18.234.140.174:5009/view_lesson/{{course.class_id}}/{{course.course_id}}/{{course.learner_username}}">Go
                     to class</a>
                 {% if course.lesson_count == "100.0" %}
                 <a class="btn btn-info mt-2"
-                    href="http://127.0.0.1:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
+                    href="http://18.234.140.174:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
                     to Final Quiz</a>
                 {% else %}
                 <a class="btn btn-info mt-2 disabled"
-                    href="http://127.0.0.1:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
+                    href="http://18.234.140.174:5008/view_quiz/{{course.class_id}}/{{course.course_id}}">Go
                     to Final Quiz</a>
                 {% endif %}
                 {% if course.is_withdrawable == True %}
                 <a class="btn btn-danger mt-2"
-                    href="http://127.0.0.1:5010/withdraw_course/{{course.course_id}}/{{course.class_id}}/{{course.learner_username}}">Withdraw</a>
+                    href="http://18.234.140.174:5010/withdraw_course/{{course.course_id}}/{{course.class_id}}/{{course.learner_username}}">Withdraw</a>
                 {% endif %}
             </div>
         </div>

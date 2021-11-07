@@ -23,7 +23,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/courses">Course Management</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
                     </li>
             
                 
@@ -59,7 +59,7 @@
         {% for courseInfo in courses %}
         <div class="row">
             <h4 class="col-md-9">{{courseInfo.course_id}}: {{courseInfo.title}}</h4>
-            <button class="btn btn-info col-md-3" onclick="location.href='http://127.0.0.1:5000/classes/{{courseInfo.course_id}}'">View Classes</button>
+            <button class="btn btn-info col-md-3" onclick="location.href='http://18.234.140.174:5000/classes/{{courseInfo.course_id}}'">View Classes</button>
             {% if courseInfo.is_retired == true %}
             <a>Status: Retired</a>
             {% else %}

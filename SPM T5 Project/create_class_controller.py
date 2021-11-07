@@ -47,7 +47,7 @@ def create_class():
         )
 
         classDAO.insert_one(one_class_object)
-        return redirect(f'http://127.0.0.1:5000/classes/{request.form["course_id"]}')
+        return redirect(f'http://18.234.140.174:5000/classes/{request.form["course_id"]}')
     except:
         return (
             jsonify({"code": 400, "msg": "Failed Creating class and course!"}),
