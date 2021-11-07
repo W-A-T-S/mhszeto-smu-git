@@ -13,15 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+ 
 </head>
 
 <body>
@@ -33,13 +26,14 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Learner Dashboard</a>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://18.234.140.174:5000/courses">Course Management</a>
                     </li>
+                
 
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Welcome, Learner!</a>
+                            data-bs-toggle="dropdown" aria-expanded="false">Welcome, Adminstrator!</a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Logout</a></li>
                         </ul>
@@ -53,44 +47,67 @@
     <header class="bg-secondary py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Learner Courses</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Pending Courses</p>
+                <h1 class="display-4 fw-bolder"> Adminstrator Dashboard</h1>
+                <p class="lead fw-normal text-white-50 mb-0"> Review Request, Assign Learners, Assign Trainers </p>
             </div>
         </div>
     </header>
 
-    <br>
+    <br><br>
     <!-- Section-->
-    <div class="container">
-        <div class="row">
-            <h3 class="col-md-8"></h3>
-        </div>
-        <!-- enrolled_courses_dict = {"course_id": course_id, "class_id":class_id, "course_description":
-        course_description,"start_datetime":start_datetime, "end_datetime":end_datetime,"lesson_count":lesson_count } -->
+    <div class="container" id="test">
 
 
-        <hr />
-        <br>
-        {% for course in courses %}
+        <h4>{{successmsg}}</h4>
 
-        <h4 style="font-size:19px" class="">Course ID: {{course.course_id}}</h4>
-        <div class="row py-2">
-            <div class="col-md-10">
-                <p style="font-size:19px" class="">Description: {{course.course_description}}</p>
-                <p style="font-size:19px" class="">Class: {{course.class_id}}</p>
-                <p style="font-size:19px" class="">Period: {{course.start_datetime}} to {{course.end_datetime}}</p>
-                {% if course.is_enrolment_rejected==True %}
-                <p style="font-size:19px; color:red;" class="">Enrolment Status: Rejected</p>
-                {% else %}
-                <p style="font-size:19px; color:orange;" class="">Enrolment Status: Pending</p>
-                {% endif %}
+        <!-- Available Learner Table -->
+        <table class="table table-condensed" id="assignLearnerTable">
+            <thead class="table-info">
+                <tr>
+                    <th>Learner ID</th>
+                    <th>Learner Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for learnerInfo in learners %}
+                <tr>
+                    <td class="nr">{{learnerInfo.username}}</td>
+                    <td>{{learnerInfo.name}}</td>
+                    <td> <button type="button" class="btn btn-info"
+                            onclick="location.href='http://127.0.0.1:5001/updatelearner/{{course_id}}/{{class_id}}/{{learnerInfo.username}}/larrypaperchaser'">Select
+                        </button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <!-- Assign Learner Modal -->
+        <div class="modal fade" id="assignLearnerModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="approveModalLabel">Action Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want to confirm this action?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="handler()">Assign</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
-        {% endfor %}
+
     </div>
 
-    <br><br>
 
+    <br><br>
     <!-- Footer-->
     <footer class="py-5">
         <div class="container">
