@@ -13,8 +13,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
- 
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
 </head>
 
 <body>
@@ -24,26 +25,66 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        
+
         </div>
     </nav>
 
-   
+
     <!-- Section-->
     <div class="container" id="test">
-        
         <br><br>
 
-        <center>
+
         <h1> AIO Login System </h1>
 
         <br><br>
+        <div class="row">
+            <h3>Learners</h3>
+            <div class="col col-2">
 
-        <button class="btn btn-info col-md-3"  onclick="location.href='http://18.234.140.174:5007/view_enrolled_courses/JohnSmithTheMan'">Learner Login</button>
-        <button class="btn btn-info col-md-3" onclick="location.href='http://18.234.140.174:5006/create_quizzes'" >Trainer Login</button>
-        <button class="btn btn-info col-md-3" onclick="location.href='http://18.234.140.174:5000/courses'">Admin Login</button>
-        
-        </center>
+                <button class="btn btn-info"
+                    onclick="location.href='http://18.234.140.174:5007/view_enrolled_courses/JohnSmithTheMan'">Enrolled
+                    Courses</button>
+            </div>
+            <div class="col col-2">
+                <button class="btn btn-info"
+                    onclick="location.href='http://18.234.140.174:5007/view_completed_courses/JohnSmithTheMan'">Completed
+                    Courses</button>
+            </div>
+            <div class="col col-2">
+                <button class="btn btn-info"
+                    onclick="location.href='http://18.234.140.174:5010/view_eligible_courses/JohnSmithTheMan'">
+                    Eligible Courses</button>
+            </div>
+            <div class="col col-2">
+                <button class="btn btn-info"
+                    onclick="location.href='http://18.234.140.174:5007/view_pending_courses/JohnSmithTheMan'">Pending
+                    Courses</button>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <h3>Trainer</h3>
+            <div class="col col-2">
+                <button class="btn btn-info" onclick="location.href='http://18.234.140.174:5006/create_quizzes'">Create
+                    Quiz</button>
+            </div>
+
+
+
+        </div>
+        <div class="row">
+            <h3>Admin</h3>
+            <div class="col col-2">
+                <button class="btn btn-info" onclick="location.href='http://18.234.140.174:5000/courses'">Manage
+                    Courses</button>
+            </div>
+
+        </div>
+
+
 
     </div>
 
