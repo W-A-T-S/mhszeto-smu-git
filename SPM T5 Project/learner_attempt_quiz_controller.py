@@ -57,7 +57,7 @@ def view_quiz(class_id, course_id, lesson_id):
             }
         )
 
-    return render_template("takequiz.html", quiz=json.dumps(quiz_dict))
+    return render_template("learner_take_quiz.html", quiz=json.dumps(quiz_dict))
 
 
 @app.route("/view_quiz/<string:class_id>/<string:course_id>")
