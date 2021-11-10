@@ -1,5 +1,7 @@
 # SPM G9 Project Team 5
 
+<img src="https://user-images.githubusercontent.com/79787784/141077907-57ba8b38-38b4-4f94-847e-43b069244c22.png" alt="drawing" style="width:200px;"/>
+
 ## All-In-One Learning System
 
 ### Main Contributors
