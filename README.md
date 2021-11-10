@@ -7,7 +7,7 @@
 | ------------|:---------------:|
 | Hajarah     | hajparv      |
 | Brennan     |  mhszeto2019      |
-| Izzat       | izzkhair     |
+| Izzat       | izzkhairable     |
 |  johnchowsmu |       johnchowsmu    |
 | Yong Wei    | ywologist2    |
 
@@ -22,7 +22,7 @@ pip install flask-cors
 ## Running the application
 As we adopt the microservices approach, you would need to run the individual controller python file in the /"SPM T5 Project" directory.
 ```
-python <NameOfFile>
+python <NameOfControllerFile>.py
 ```
 
 Example
