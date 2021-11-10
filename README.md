@@ -17,6 +17,7 @@
 pip install flask
 pip install pymongo
 pip install flask-cors
+pip install python-dateutil
 ```
 
 ## Running the application
